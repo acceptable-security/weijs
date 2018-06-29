@@ -12,7 +12,7 @@ const ether = new Ether(web3.currentProvider || "http://localhost:4545");
 const accounts = await ether.accounts;
 const balance = await ether.balance(accounts[0]);
 
-// Ripped from Etherjs
+// Ripped from Ethjs
 const abi = [{
 	"constant": true,
 	"inputs": [],
