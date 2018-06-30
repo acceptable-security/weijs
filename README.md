@@ -5,7 +5,7 @@ A simple to use Ethereum APi
 ## API Example
 
 ```javascript
-import { Ether } from "etheres";
+import { Ether } from "etherjs";
 
 const ether = new Ether(web3.currentProvider || "http://localhost:4545");
 
