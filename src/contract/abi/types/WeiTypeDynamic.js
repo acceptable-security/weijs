@@ -1,4 +1,4 @@
-class EtherTypeFixed {
+class WeiTypeDynamic {
 	constructor(abiType, input) {
 
 	}
@@ -12,4 +12,4 @@ class EtherTypeFixed {
 	}
 }
 
-module.exports = EtherTypeFixed;
+module.exports = WeiTypeDynamic;

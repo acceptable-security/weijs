@@ -1,12 +1,12 @@
-const EtherHttpProvider = require("./provider/EtherHttpProvider");
-const EtherWeb3Provider = require("./provider/EtherHttpProvider");
+const WeiHttpProvider = require("./provider/WeiHttpProvider");
+const WeiWeb3Provider = require("./provider/WeiHttpProvider");
 
 const Web3ProviderClasses = [
 	"HttpProivder",
 	"IpcProivder"
 ];
 
-const EtherRPC = [
+const WeiRPC = [
 	"web3_clientVersion",
 	"web3_sha3",
 	"net_version",
@@ -71,11 +71,11 @@ const EtherRPC = [
 	"shh_getMessages"
 ];
 
-class Ether {
+class Wei {
 	constructor(provider) {
 		if ( typeof a == "object" ) {
 			if ( Web3ProviderClasses.indexOf(provider.constructor.name) >= 0 ) {
-				this.provider = new EtherWeb3Provider(provider);				
+				this.provider = new WeiWeb3Provider(provider);				
 			}
 			else {
 				throw new Error("Unknown provider object passed to constructor");
@@ -83,7 +83,7 @@ class Ether {
 		}
 		else if ( typeof provider == "string" ) {
 			if ( provider.substring(0, 4) == "http" ) {
-				this.provider = new EtherHttpProvider(provider);
+				this.provider = new WeiHttpProvider(provider);
 			}
 			else {
 				throw new Error(`Unknown provider string "${provider}" passed to constructor`);
@@ -95,7 +95,7 @@ class Ether {
 
 	_loadRPCGetters() {
 		// Create a series of getters 
-		for ( const name of EtherRPC ) {		
+		for ( const name of WeiRPC ) {		
 			const parts = name.split('_');
 
 			if ( this[parts[0]] == undefined ) {
@@ -107,4 +107,4 @@ class Ether {
 	}
 }
 
-module.exports = Ether;
+module.exports = Wei;

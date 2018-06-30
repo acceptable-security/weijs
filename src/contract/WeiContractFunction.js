@@ -1,4 +1,4 @@
-class EtherContractEvent {
+class WeiContractFunction {
 	constructor(ether, abi) {
 
 	}

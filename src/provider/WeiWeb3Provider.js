@@ -1,6 +1,6 @@
-const EtherProvider = require("./EtherProvider.js");
+const WeiProvider = require("./WeiProvider.js");
 
-class EtherWeb3Provider extends EtherProvider {
+class WeiWeb3Provider extends WeiProvider {
 	constructor(provider) {
 		super();
 		this.provider = provider;
@@ -20,4 +20,4 @@ class EtherWeb3Provider extends EtherProvider {
 	}
 }
 
-module.exports = EtherWeb3Provider;
+module.exports = WeiWeb3Provider;

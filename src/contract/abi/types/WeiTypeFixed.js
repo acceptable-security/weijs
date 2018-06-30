@@ -1,4 +1,4 @@
-class EtherTypeTuple {
+class WeiTypeFixed {
 	constructor(abiType, input) {
 
 	}
@@ -12,4 +12,4 @@ class EtherTypeTuple {
 	}
 }
 
-module.exports = EtherTypeTuple;
+module.exports = WeiTypeFixed;

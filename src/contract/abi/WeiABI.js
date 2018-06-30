@@ -1,17 +1,17 @@
 const BN = require('bn.js');
 const keccack = require('keccak');
 
-const EtherABIArg = require('./EtherABIArg.js');
-const EtherABIType = require('./EtherABIType.js');
+const WeiABIArg = require('./WeiABIArg.js');
+const WeiABIType = require('./WeiABIType.js');
 
 function keccack256(x) {
 	return createKeccakHash('keccak256').update(x).digest();
 }
 
-class EtherABI {
+class WeiABI {
 	constructor(abi) {
 		this.abi = abi;
-		this.inputs = this.abi.inputs.map((x) => new EtherABIType(x));
+		this.inputs = this.abi.inputs.map((x) => new WeiABIType(x));
 
 		// Generate the Signature
 		const args = this.abi.inputs.map((obj) => obj.type).join(",");

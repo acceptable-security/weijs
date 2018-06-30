@@ -1,14 +1,21 @@
-const EtherDynamicTypes = ['string', 'bytes'];
+const WeiTypeBytes   = require('WeiTypeBytes');
+const WeiTypeDynamic = require('WeiTypeDynamic');
+const WeiTypeFixed   = require('WeiTypeFixed');
+const WeiTypeNumber  = require('WeiTypeNumber');
+const WeiTypeTuple   = require('WeiTypeTuple');
 
-class EtherABIType {
+const WeiDynamicTypes = ['string', 'bytes'];
+
+class WeiABIType {
 	constructor(abiType) {
 		this.name = abiType.name;
 		this.type = abiType.type;
-		this.components = abiType.components.map((x) => new EtherABIType(x));
+		this.components = abiType.components.map((x) => new WeiABIType(x));
 
 		this.parseType();
 	}
 
+	// Parse the type string into valuable data used later on in encoding/decoding
 	parseType() {
 		// Parse the array component
 		if ( this.type.indexOf("[") > -1 ) {
@@ -35,32 +42,32 @@ class EtherABIType {
 
 		// Basic type is the thing the array would be
 		const simpleTypeLen = Math.max(this.type.length, this.type.indexOf('['));
-		const simpleType = this.type.substring(0, simpleTypeLen);
+		this.simpleType = this.type.substring(0, simpleTypeLen);
 
-		if ( EtherDynamicTypes.indexOf(simpleType) > -1 ) {
+		if ( WeiDynamicTypes.indexOf(this.simpleType) > -1 ) {
 			// string/bytes types
 			this.isDynamicType = true;
 			this.isSimpleType = false;
 		}
-		else if ( simpleType.startsWith('uint') || simpleType.startsWith('int') ) {
+		else if ( this.simpleType.startsWith('uint') || this.simpleType.startsWith('int') ) {
 			// uint<M>/int<M>/uint/int based types. Defaults to 256 bits
 			this.isInt = true;
-			this.intSigned = !simpleType.startsWith('u');
-			this.intSize = parseInt(simpleType.substring(this.signed ? 3 : 4) || '256');
+			this.intSigned = !this.simpleType.startsWith('u');
+			this.intSize = parseInt(this.simpleType.substring(this.signed ? 3 : 4) || '256');
 
 			assert(this.intSize % 2 == 0);
 			assert(this.intSize <= 256);
 		}
-		else if ( simpleType.startsWith('bytes') ) {
+		else if ( this.simpleType.startsWith('bytes') ) {
 			// bytes<M> types
 			this.isStaticBytes = true;
-			this.byteCount = parseInt(simpleType.substring(5));
+			this.byteCount = parseInt(this.simpleType.substring(5));
 
 			assert(this.byteCount >= 0 && this.byteCount <= 32);
 		}
 		else {
 			// Other qWirKy TyPeS
-			switch ( simpleType ) {
+			switch ( this.simpleType ) {
 				case 'address':
 					this.intSigned = false;
 					this.intSize = 160;
@@ -90,10 +97,6 @@ class EtherABIType {
 
 		return this.isDynamicArray || this.isDynamicType || staticChildren;
 	}
-
-	encodeStatic(arg) {
-		if (  )
-	}
 }
 
-module.exports = EtherABIType;
+module.exports = WeiABIType;

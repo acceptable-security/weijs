@@ -1,4 +1,4 @@
-class EtherTypeDynamic {
+class WeiTypeTuple {
 	constructor(abiType, input) {
 
 	}
@@ -12,4 +12,4 @@ class EtherTypeDynamic {
 	}
 }
 
-module.exports = EtherTypeDynamic;
+module.exports = WeiTypeTuple;

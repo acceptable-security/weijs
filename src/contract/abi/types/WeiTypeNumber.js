@@ -1,6 +1,6 @@
 const BN = require('bn.js');
 
-class EtherTypeNumber {
+class WeiTypeNumber {
 	constructor(abiType, input) {
 		this.type = abiType;
 		assert(this.type.isInt || this.type.isAddress || this.type.isBool);
@@ -55,4 +55,4 @@ class EtherTypeNumber {
 	}
 }
 
-module.exports = EtherTypeNumber;
+module.exports = WeiTypeNumber;

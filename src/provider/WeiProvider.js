@@ -1,4 +1,4 @@
-class EtherProvider {
+class WeiProvider {
 	constructor() {
 		this._id = 0;
 	}
@@ -17,4 +17,4 @@ class EtherProvider {
 	}
 }
 
-module.exports = EtherProvider;
+module.exports = WeiProvider;
