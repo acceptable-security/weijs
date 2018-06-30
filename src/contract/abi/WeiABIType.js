@@ -65,6 +65,15 @@ class WeiABIType {
 
 			assert(this.byteCount >= 0 && this.byteCount <= 32);
 		}
+		else if ( this.simpleType.startsWith('fixed') || this.simpleType.startsWith('ufixed') ) {
+			this.isFixed = true;
+			this.fixedSigned = this.simpleType.startsWith('u');
+			const sizePart = this.simpleType.substring(this.fixedSigned ? 6 : 5) || '128x18';
+			const sizes = sizePart.split('x');
+
+			this.fixedUpper = parseInt(sizes[0]);
+			this.fixedLower = parseInt(sizes[1]);
+		}
 		else {
 			// Other qWirKy TyPeS
 			switch ( this.simpleType ) {
