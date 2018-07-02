@@ -1,11 +1,10 @@
 const BN = require('bn.js');
 const keccack = require('keccak');
 
-const WeiABIArg = require('./WeiABIArg.js');
 const WeiABIType = require('./WeiABIType.js');
 
 function keccack256(x) {
-	return createKeccakHash('keccak256').update(x).digest();
+	return keccack('keccak256').update(x).digest();
 }
 
 class WeiABI {
@@ -21,24 +20,41 @@ class WeiABI {
 
 	encode(args, packed = false) {
 		// Start with first 4 bytes of function signature
-		const output = keccack256(this.signature).slice(0, 4);
+		let output = keccack256(this.signature).slice(0, 4);
 
 		// How many bytes of static section
 		const staticSection = this.abi.inputs.length * 32;
 
+		// Offsets for the dynamic section
+		const currOffset = staticSection;
+
+		// Parsed args
+		const parsed = [];
+
 		// Encode static section
 		for ( let i = 0; i < this.inputs.length; i++ ) {
 			const input = this.inputs[i];
+			const parse = input.parse(args[i]);
+
+			parsed.push(parse);
 
 			if ( input.isStatic ) {
-				output = output.concat(input.encode(args, packed));
+				console.log()
+				output = Buffer.concat([output, parse.encode()]);
+			}
+			else {
+				const offset = (new BN(currOffset)).toBuffer('be', 32);
+				output = Buffer.concat([output, offset]);
+				currOffset += parse.size();
 			}
 		}
 
-		return output.toString('hex');
+		return output;
 	}
 
 	decode(bin) {
 
 	}
 }
+
+module.exports = WeiABI;

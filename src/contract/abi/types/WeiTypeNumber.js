@@ -1,3 +1,4 @@
+const assert = require('assert');
 const BN = require('bn.js');
 
 class WeiTypeNumber {
@@ -29,15 +30,16 @@ class WeiTypeNumber {
 				}
 			}
 
-			if ( input instanceof BN ) {
+			if ( input.constructor.name == 'BN' ) {
 				if ( abiType.isIntSigned ) {
-					input = input.toTwos(256);
+					input = input.toTwos(this.type.intSize);
 				}
 
 				this.data = input.toBuffer('be', 32);
-			}		
-
-			throw new Error("Unknown type");
+			}
+			else {
+				throw new Error("Unknown type");
+			}
 		}
 	}
 
@@ -47,7 +49,7 @@ class WeiTypeNumber {
 
 	decode() {
 		if ( abiType.isIntSigned ) {
-			return new BN(this.data).fromTwos(256);
+			return new BN(this.data).fromTwos(this.type.intSize);
 		}
 		else {
 			return new BN(this.data);

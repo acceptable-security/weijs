@@ -4,11 +4,14 @@
   "description": "An alternative Ethereum JavaScript API",
   "main": "src/Wei.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bn.js": "^4.11.8"
+    "bn.js": "^4.11.8",
+    "eslint": "^5.0.1",
+    "keccak": "^1.4.0",
+    "mocha": "^5.2.0"
   }
 }

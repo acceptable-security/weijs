@@ -1,6 +1,10 @@
+const assert = require('assert');
+
 class WeiTypeBytes {
 	constructor(abiType, input) {
-		assert(abiType.isStaticBytes);
+		this.type = abiType;
+
+		assert(this.type.isStaticBytes);
 
 		if ( typeof input == 'string' ) {
 			if ( input.substring(0, 2) == '0x' ) {
@@ -15,6 +19,10 @@ class WeiTypeBytes {
 			throw new Error("Unable to handle unknown input type");
 		}
 
+		if ( input.length > this.type.byteCount ) {
+			throw new Error(`Can't take a buffer of ${input.length} for a ${this.type.byteCount} byte type`);
+		}
+
 		this.data = input;
 		this.pad();
 	}
@@ -24,7 +32,7 @@ class WeiTypeBytes {
 			// Pad the input to 32 byte alignment
 			const pad = [];
 
-			for ( int i = 0; i < this.data.length % 32; i++ ) {
+			for ( let i = 0; i < this.data.length % 32; i++ ) {
 				pad,push(0);
 			}
 

@@ -1,5 +1,5 @@
 class WeiContractEvent {
-	constructor(ether, abi) {
+	constructor(wei, abi) {
 
 	}
 }

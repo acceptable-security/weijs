@@ -1,8 +1,10 @@
-const WeiTypeBytes   = require('WeiTypeBytes');
-const WeiTypeDynamic = require('WeiTypeDynamic');
-const WeiTypeFixed   = require('WeiTypeFixed');
-const WeiTypeNumber  = require('WeiTypeNumber');
-const WeiTypeTuple   = require('WeiTypeTuple');
+const assert = require('assert');
+
+const WeiTypeBytes   = require('./types/WeiTypeBytes.js');
+const WeiTypeDynamic = require('./types/WeiTypeDynamic.js');
+const WeiTypeFixed   = require('./types/WeiTypeFixed.js');
+const WeiTypeNumber  = require('./types/WeiTypeNumber.js');
+const WeiTypeTuple   = require('./types/WeiTypeTuple.js');
 
 const WeiDynamicTypes = ['string', 'bytes'];
 
@@ -10,7 +12,7 @@ class WeiABIType {
 	constructor(abiType) {
 		this.name = abiType.name;
 		this.type = abiType.type;
-		this.components = abiType.components.map((x) => new WeiABIType(x));
+		this.components = (abiType.components || []).map((x) => new WeiABIType(x));
 
 		this.parseType();
 	}
@@ -66,6 +68,7 @@ class WeiABIType {
 			assert(this.byteCount >= 0 && this.byteCount <= 32);
 		}
 		else if ( this.simpleType.startsWith('fixed') || this.simpleType.startsWith('ufixed') ) {
+			// ufixed<M>x<N> and fixed<M>x<N> types
 			this.isFixed = true;
 			this.fixedSigned = this.simpleType.startsWith('u');
 			const sizePart = this.simpleType.substring(this.fixedSigned ? 6 : 5) || '128x18';
@@ -105,6 +108,26 @@ class WeiABIType {
 											  .reduce((x, y) => x && y, true);
 
 		return this.isDynamicArray || this.isDynamicType || staticChildren;
+	}
+
+	parse(arg, forceSimple = false) {
+		if ( !forceSimple && (this.isDynamicType || this.isDynamicArray) ) {
+			return new WeiTypeDynamic(this, arg);
+		}
+		else if ( this.isTuple ) {
+			return new WeiTypeTuple(this, arg);
+		}
+		else if ( this.isInt || this.isAddress || this.isBool ) {
+			return new WeiTypeNumber(this, arg);
+		}
+		else if ( this.isStaticBytes ) {
+			return new WeiTypeBytes(this, arg);
+		}
+		else if ( this.isFixed ) {
+			return new WeiTypeFixed(this, arg);
+		}
+
+		throw new Error("Failed to figure out type.");
 	}
 }
 

@@ -1,6 +1,6 @@
 class WeiTypeTuple {
 	constructor(abiType, input) {
-
+		
 	}
 
 	encode() {
