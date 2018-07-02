@@ -1,7 +1,6 @@
 const BN = require('bn.js');
 const keccack = require('keccak');
 
-const Pad28 = Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 const WeiABIType = require('./WeiABIType.js');
 
 function keccack256(x) {
@@ -31,26 +30,28 @@ class WeiEventABI {
     }
 
     sig() {
-        const sig = Buffer.concat([Pad28, keccack256(this.signature).slice(0, 4)]);
-        return '0x' + evenPad(sig.toString('hex'));
+        return '0x' + evenPad(keccack256(this.signature).toString('hex'));
     }
 
     decode(logs) {
-        let data = logs.data;
-        const topics = logs.topic;
+        // Decode data and topics to buffers
+        let data = Buffer.from(logs.data.substring(2), 'hex');
+        const topics = logs.topics.map((x) => Buffer.from(x.substring(2), 'hex'));
 
-        if ( topics[0] != this.sig() ) {
-            return;
+        // Make sure this is the right event
+        if ( logs.topics[0] != this.sig() ) {
+            throw new Error(`Can't decode ${topics[0]} with ${this.sig()}`);
         }
 
         const args = {};
 
+        // Decode indexed parts
         for ( let i = 0; i < this.indexInputs.length; i++ ) {
             const input = this.indexInputs[i];
             args[input.name] = input.parse(topics[i + 1]).decode();
         }
 
-
+        // Decode unindexed parts
         for ( let i = 0; i < this.unindexInputs.length; i++ ) {
             const input = this.unindexInputs[i];
 

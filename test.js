@@ -3,13 +3,11 @@ const wei = new Wei("http://localhost:8545");
 const ERC20 = require('./examples/erc20.js');
 
 async function main() {
-    const zapToken = new ERC20(wei, '0x6781a0f84c7e9e846dcb84a9a5bd49333067b104');
-
-    console.log(await zapToken.name());
-    console.log(await zapToken.symbol());
-    console.log((await zapToken.decimals()).toString());
-    console.log((await zapToken.totalSupply()).toString());
-    
+    const token = new ERC20(wei, '0x8d12a197cb00d4747a1fe03395095ce2a5cc6819');
+    const emit = await token.contract.Transfer.listen(1 * 1000);
+    emit.on('event', (obj) => {
+    	console.log("Transfer", obj['_value'].toString(), "from", '0x' + obj['_from'].toString(16), "to", '0x' + obj['_to'].toString(16));
+    });   
 }
 
 // Fuck you too nodejs.
