@@ -49,7 +49,7 @@ class WeiContractFunction {
 		defaultToHex(txObj, 'data', encode);
 
 		res['rawOutput'] = await this._wei.rpc.eth.call(txObj, 'latest');
-		// res['output'] = this.abi.decode(res['rawOutput']);
+		res['output'] = this.abi.decode(Buffer.from(res['rawOutput'].substring(2), 'hex'));
 
 		if ( !txObj['const'] ) {
 			res['txHash'] = await this._wei.rpc.sendTransaction(txObj);

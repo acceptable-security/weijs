@@ -8,8 +8,8 @@ class WeiTypeDynamic {
 
 		if ( this.type.isDynamicType ) {
 			switch ( this.type.simpleType ) {
-				case 'string': this.data = Buffer.from(input, 'utf8');
-				case 'bytes':  this.data = input;
+				case 'string': this.data = Buffer.from(input, 'utf8'); break;
+				case 'bytes':  this.data = input;					   break;
 			}
 
 			if ( !(this.data instanceof Buffer) ) {

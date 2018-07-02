@@ -48,7 +48,7 @@ class WeiTypeNumber {
 	}
 
 	decode() {
-		if ( abiType.isIntSigned ) {
+		if ( this.type.isIntSigned ) {
 			return new BN(this.data).fromTwos(this.type.intSize);
 		}
 		else {

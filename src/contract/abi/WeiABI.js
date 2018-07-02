@@ -11,6 +11,7 @@ class WeiABI {
 	constructor(abi) {
 		this.abi = abi;
 		this.inputs = this.abi.inputs.map((x) => new WeiABIType(x));
+		this.outputs = this.abi.outputs.map((x) => new WeiABIType(x));
 
 		// Generate the Signature
 		const args = this.abi.inputs.map((obj) => obj.type).join(",");
@@ -26,7 +27,7 @@ class WeiABI {
 		const staticSection = this.abi.inputs.length * 32;
 
 		// Offsets for the dynamic section
-		const currOffset = staticSection;
+		let currOffset = staticSection;
 
 		// Parsed args
 		const parsed = [];
@@ -39,7 +40,6 @@ class WeiABI {
 			parsed.push(parse);
 
 			if ( input.isStatic ) {
-				console.log()
 				output = Buffer.concat([output, parse.encode()]);
 			}
 			else {
@@ -53,7 +53,19 @@ class WeiABI {
 	}
 
 	decode(bin) {
+		let tmp = Buffer.from(bin);
+		const outputs = [];
 
+		for ( let i = 0; i < this.outputs.length; i++ ) {
+			const output = this.outputs[i];
+			const data = tmp.slice(0, 32);
+			const parsed = output.parse(data).decode();
+
+			outputs.push(parsed);
+			tmp = tmp.slice(32);
+		}
+
+		return outputs;
 	}
 }
 

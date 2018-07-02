@@ -25,7 +25,7 @@ class WeiContract extends EventEmitter {
 	_initABI() {
 		for ( const obj of this.abi ) {
 			if ( obj.type == "function" ) {
-				this.functions[obj.name] = new WeiContractFunction(this._wei, obj);;
+				this.functions[obj.name] = new WeiContractFunction(this._wei, obj);
 			}
 			else {
 				console.warn("Unsupported type", obj.type);
