@@ -7,6 +7,9 @@ async function main() {
 
 	console.log(await zapToken.name());
 	console.log(await zapToken.symbol());
+	console.log((await zapToken.decimals()).toString());
+	console.log((await zapToken.totalSupply()).toString());
+	
 }
 
 // Fuck you too nodejs.

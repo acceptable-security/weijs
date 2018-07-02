@@ -1,5 +1,7 @@
 # weijs
 
+[![Build Status](https://travis-ci.org/block8437/weijs.svg?branch=master)](https://travis-ci.org/block8437/weijs)
+
 A simple to use Ethereum APi
 
 ## API Example
