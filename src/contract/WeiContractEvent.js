@@ -7,28 +7,10 @@ class WeiContractEventListener extends EventEmitter {
 
         this._event = event;
         this._filterID = filterID;
+        this.interval = interval;
 
         if ( interval > 0 ) {
-            // Async query function
-            let queryFn = async () => {
-                const events = await this.query();
-
-                for ( const event of events ) {
-                    this.emit('event', event);
-                }
-            };
-
-            // Wrap the async query function in an interval
-            let wrapperFn = () => {
-                queryFn().then(() => {
-                    setTimeout(wrapperFn, interval);
-                }).catch((err) => {
-                    throw err;
-                });
-            };
-
-            // Call the interval
-            setTimeout(wrapperFn, interval);
+            this.listen();
         }
     }
 
@@ -42,6 +24,41 @@ class WeiContractEventListener extends EventEmitter {
         }
 
         return parsed;
+    }
+
+    listen() {
+        if ( this.interval == 0 ) {
+            return;
+        }
+
+        // Async query function
+        let queryFn = async () => {
+            const events = await this.query();
+
+            for ( const event of events ) {
+                this.emit('event', event);
+            }
+        };
+
+        // Wrap the async query function in an interval
+        let wrapperFn = () => {
+            queryFn().then(() => {
+                if ( this.interval == 0 ) {
+                    return;
+                }
+
+                this._timeoutID = setTimeout(wrapperFn, this.interval);
+            }).catch((err) => {
+                throw err;
+            });
+        };
+
+        // Call the interval
+        this._timeoutID = setTimeout(wrapperFn, this.interval);
+    }
+
+    cancel() {
+        clearTimeout(this._timeoutID);
     }
 }
 
