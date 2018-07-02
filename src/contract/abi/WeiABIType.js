@@ -107,7 +107,7 @@ class WeiABIType {
 		const staticChildren = this.components.map((x) => x.isStatic)
 											  .reduce((x, y) => x && y, true);
 
-		return this.isDynamicArray || this.isDynamicType || staticChildren;
+		return !this.isDynamicArray && !this.isDynamicType && staticChildren;
 	}
 
 	parse(arg, forceSimple = false) {

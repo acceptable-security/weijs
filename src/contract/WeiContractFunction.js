@@ -1,6 +1,14 @@
 const BN = require('bn.js');
 const WeiABI = require('./abi/WeiABI.js');
 
+function evenPad(hex) {
+	if ( hex.length % 2 != 0 ) {
+		hex = '0' + hex;
+	}
+
+	return hex;
+}
+
 function defaultToHex(obj, name, def) {
 	obj[name] = obj[name] || new BN(def);
 
@@ -9,10 +17,10 @@ function defaultToHex(obj, name, def) {
 			obj[name] = new BN(obj[name]);
 		}
 
-		obj[name] = '0x' + obj[name].toString(16);		
+		obj[name] = '0x' + evenPad(obj[name].toString(16));
 	}
 	else if ( def instanceof Buffer) {
-		obj[name] = '0x' + (obj[name] || def).toString('hex');
+		obj[name] = '0x' + evenPad((obj[name] || def).toString('hex'));
 	}
 }
 
@@ -32,11 +40,13 @@ class WeiContractFunction {
 	constructor(wei, abi) {
 		this._wei = wei;
 		this.abi = new WeiABI(abi);
+		this.constant = abi.constant;
 	}
 
 	async exec(address, ... args) {
-		const txObj = args[args.length - 1];
+		const txObj = args.length > 0 ? args[args.length - 1] : {};
 		txObj['to'] = txObj['to'] || address;
+		txObj['const'] = txObj['const'] == undefined ? this.constant : txObj['const'];
 
 		if ( !validateTxObj(txObj) ) {
 			throw new Error("Last argument to a function must be the txobj");
@@ -48,12 +58,20 @@ class WeiContractFunction {
 
 		defaultToHex(txObj, 'data', encode);
 
+		// Get output of function - this works even on non-constant functions
+		// TODO - does this introduce a race condition where the output can be different
+		// because of alternative transactions affecting the contract?
 		res['rawOutput'] = await this._wei.rpc.eth.call(txObj, 'latest');
 		res['output'] = this.abi.decode(Buffer.from(res['rawOutput'].substring(2), 'hex'));
 
+		// If not a constant function, send transaction.
 		if ( !txObj['const'] ) {
-			res['txHash'] = await this._wei.rpc.sendTransaction(txObj);
-			res['txReceipt'] = await this._wei.rpc.getTransactionReceipt(res['txHash']);
+			if ( !txObj['from'] ) {
+				throw new Error("When sending a non-constant transaction, must specify a from address.");
+			}
+
+			res['txHash'] = await this._wei.rpc.eth.sendTransaction(txObj);
+			res['txReceipt'] = await this._wei.rpc.eth.getTransactionReceipt(res['txHash']);
 		}
 
 		return res;
