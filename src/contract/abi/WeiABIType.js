@@ -12,6 +12,7 @@ class WeiABIType {
     constructor(abiType) {
         this.name = abiType.name;
         this.type = abiType.type;
+        this.indexed = abiType.indexed;
         this.components = (abiType.components || []).map((x) => new WeiABIType(x));
 
         this.parseType();

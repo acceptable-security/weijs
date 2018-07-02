@@ -1,4 +1,6 @@
+const WeiContractEvent = require('./WeiContractEvent.js');
 const WeiContractFunction = require('./WeiContractFunction.js');
+
 const EventEmitter = require('events');
 
 class WeiContract extends EventEmitter {
@@ -23,12 +25,20 @@ class WeiContract extends EventEmitter {
     }
 
     _initABI() {
+        let eventObj;
+
         for ( const obj of this.abi ) {
-            if ( obj.type == "function" ) {
+            switch ( obj.type ) {
+            case "function":
                 this.functions[obj.name] = new WeiContractFunction(this._wei, obj);
-            }
-            else {
-                console.warn("Unsupported type", obj.type);
+                break;
+            case "event":
+                eventObj = new WeiContractEvent(this._wei, obj);
+                this.events[eventObj.abi.sig()] = eventObj;
+                break;
+            default:
+                console.warn("Unsupported type", obj.type, obj);
+                break;
             }
         }
     }
