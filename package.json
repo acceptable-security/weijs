@@ -4,7 +4,7 @@
   "description": "An alternative Ethereum JavaScript API",
   "main": "src/Wei.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "eslint . && ./node_modules/mocha/bin/mocha"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +13,6 @@
     "eslint": "^5.0.1",
     "keccak": "^1.4.0",
     "mocha": "^5.2.0"
-  }
+  },
+  "devDependencies": {}
 }

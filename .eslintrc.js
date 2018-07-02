@@ -1,16 +1,19 @@
 module.exports = {
     "env": {
         "node": true,
-        "es6": true
+        "es6": true,
+        "mocha": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 2017
     },
     "rules": {
+        "no-console": "off",
+        "no-mixed-spaces-and-tabs": "off",
         "indent": [
-            "off",
-            "tab"
+            "warn",
+            4
         ],
         "linebreak-style": [
             "error",

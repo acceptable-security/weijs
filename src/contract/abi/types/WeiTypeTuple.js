@@ -1,15 +1,16 @@
 class WeiTypeTuple {
-	constructor(abiType, input) {
-		
-	}
+    constructor(abiType, input) {
+        this.type = abiType;
+        this.input = input;
+    }
 
-	encode() {
+    encode() {
 
-	}
+    }
 
-	decode() {
+    decode() {
 
-	}
+    }
 }
 
 module.exports = WeiTypeTuple;
