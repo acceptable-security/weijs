@@ -1,5 +1,5 @@
 const BN = require('bn.js');
-const WeiABI = require('./abi/WeiABI.js');
+const WeiABI = require('./abi/WeiFunctionABI.js');
 
 function evenPad(hex) {
 	if ( hex.length % 2 != 0 ) {

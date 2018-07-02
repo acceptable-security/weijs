@@ -7,7 +7,7 @@ function keccack256(x) {
 	return keccack('keccak256').update(x).digest();
 }
 
-class WeiABI {
+class WeiFunctionABI {
 	constructor(abi) {
 		this.abi = abi;
 		this.inputs = this.abi.inputs.map((x) => new WeiABIType(x));
@@ -101,4 +101,4 @@ class WeiABI {
 	}
 }
 
-module.exports = WeiABI;
+module.exports = WeiFunctionABI;

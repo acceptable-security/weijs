@@ -6,6 +6,7 @@ async function main() {
 	const zapToken = new ERC20(wei, '0x6781a0f84c7e9e846dcb84a9a5bd49333067b104');
 
 	console.log(await zapToken.name());
+	console.log(await zapToken.symbol());
 }
 
 // Fuck you too nodejs.
