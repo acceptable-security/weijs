@@ -1,11 +1,7 @@
 const BN = require('bn.js');
-const keccack = require('keccak');
 
 const WeiABIType = require('./WeiABIType.js');
-
-function keccack256(x) {
-    return keccack('keccak256').update(x).digest();
-}
+const WeiUtil = require('../../WeiUtil.js');
 
 class WeiFunctionABI {
     constructor(abi) {
@@ -21,7 +17,7 @@ class WeiFunctionABI {
 
     encode(args /*, packed = false */) {
         // Start with first 4 bytes of function signature
-        let output = keccack256(this.signature).slice(0, 4);
+        let output = WeiUtil.hash(this.signature).slice(0, 4);
 
         // How many bytes of static section
         const staticSection = this.abi.inputs.length * 32;

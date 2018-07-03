@@ -1,5 +1,7 @@
 const BN = require('bn.js');
 const WeiABI = require('./abi/WeiFunctionABI.js');
+const WeiAccount = require('../account/WeiAccount.js');
+const WeiTransaction = require('../account/WeiTransaction.js');
 
 function evenPad(hex) {
     if ( hex.length % 2 != 0 ) {
@@ -43,9 +45,9 @@ class WeiContractFunction {
         this.constant = abi.constant;
     }
 
-    async exec(address, ... args) {
+    async exec(... args) {
         const txObj = args.length > 0 ? args[args.length - 1] : {};
-        txObj['to'] = txObj['to'] || address;
+        txObj['to'] = txObj['to'] || this._address;
         txObj['const'] = txObj['const'] == undefined ? this.constant : txObj['const'];
 
         if ( !validateTxObj(txObj) ) {
@@ -66,11 +68,19 @@ class WeiContractFunction {
 
         // If not a constant function, send transaction.
         if ( !txObj['const'] ) {
-            if ( !txObj['from'] ) {
-                throw new Error("When sending a non-constant transaction, must specify a from address.");
+            const sender = txObj['from'];
+
+            // Execute the transaction and find the receipt
+            if ( typeof sender == 'string') {
+                res['txHash'] = await this._wei.rpc.eth.sendTransaction(txObj);                
+            }
+            else if ( sender instanceof WeiAccount ) {
+                res['txHash'] = await sender.sendTransaction(WeiTransaction.fromObject(txObj));
+            }
+            else {
+                throw new Error("Unknown item in the 'from' field of transaction");
             }
 
-            res['txHash'] = await this._wei.rpc.eth.sendTransaction(txObj);
             res['txReceipt'] = await this._wei.rpc.eth.getTransactionReceipt(res['txHash']);
         }
 

@@ -33,10 +33,6 @@ const WeiRPCMethods = [
     "eth_getTransactionReceipt",
     "eth_getUncleByBlockHashAndIndex",
     "eth_getUncleByBlockNumberAndIndex",
-    "eth_getCompilers",
-    "eth_compileLLL",
-    "eth_compileSolidity",
-    "eth_compileSerpent",
     "eth_newFilter",
     "eth_newBlockFilter",
     "eth_newPendingTransactionFilter",
@@ -47,10 +43,6 @@ const WeiRPCMethods = [
     "eth_getWork",
     "eth_submitWork",
     "eth_submitHashrate",
-    "db_putString",
-    "db_getString",
-    "db_putHex",
-    "db_getHex",
     "shh_post",
     "shh_version",
     "shh_newIdentity",
@@ -67,6 +59,10 @@ class WeiRPC {
     constructor(wei) {
         this.wei = wei;
         this._loadRPCGetters();
+    }
+
+    async modules() {
+        return await this.wei.provider('rpc_modules', []);
     }
 
     _loadRPCGetters() {

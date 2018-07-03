@@ -1,19 +1,7 @@
 const BN = require('bn.js');
-const keccack = require('keccak');
 
 const WeiABIType = require('./WeiABIType.js');
-
-function keccack256(x) {
-    return keccack('keccak256').update(x).digest();
-}
-
-function evenPad(hex) {
-    if ( hex.length % 2 != 0 ) {
-        hex = '0' + hex;
-    }
-
-    return hex;
-}
+const WeiUtil = require('../../WeiUtil.js');
 
 class WeiEventABI {
     constructor(abi) {
@@ -30,7 +18,7 @@ class WeiEventABI {
     }
 
     sig() {
-        return '0x' + evenPad(keccack256(this.signature).toString('hex'));
+        return WeiUtil.hexBuff(WeiUtil.hash(this.signature));
     }
 
     decode(logs) {

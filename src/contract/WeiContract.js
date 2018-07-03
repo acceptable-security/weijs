@@ -27,6 +27,10 @@ class WeiContract extends EventEmitter {
             this.events[event]._address = address;
         }
 
+        for ( const fn in this.functions ) {
+            this.functions[fn]._address = address;
+        }
+
         return this;
     }
 
@@ -59,7 +63,7 @@ class WeiContract extends EventEmitter {
     _initShims() {
         // Expose functions directly and inject address
         for ( const fn in this.functions ) {
-            this[fn] = (... args) => this.functions[fn].exec(this.address, ... args);
+            this[fn] = this.functions[fn].exec;
         }
 
         // Expose events directly
