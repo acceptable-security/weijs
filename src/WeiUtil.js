@@ -1,7 +1,7 @@
 const keccack = require('keccak');
 
 module.exports = {
-    isObj: (data) => data instanceof Object && !(data instanceof Array);
+    isObj: (data) => data instanceof Object && !(data instanceof Array),
 
     hash: (data) => {
         return keccack('keccak256').update(data).digest();

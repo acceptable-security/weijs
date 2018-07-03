@@ -6,13 +6,13 @@ const WeiUtil = require('../../WeiUtil.js');
 class WeiFunctionABI {
     constructor(abi) {
         this.abi = abi;
-        this.inputs = this.abi.inputs.map((x) => new WeiABIType(x));
-        this.outputs = this.abi.outputs.map((x) => new WeiABIType(x));
+        this.inputs = (this.abi.inputs || []).map((x) => new WeiABIType(x));
+        this.outputs = (this.abi.outputs || []).map((x) => new WeiABIType(x));
 
         // Generate the Signature
         const args = this.abi.inputs.map((obj) => obj.type).join(",");
 
-        this.signature = `${abi.name}(${args})`;
+        this.signature = `${abi.name || 'constructor'}(${args})`;
     }
 
     encode(args /*, packed = false */) {
