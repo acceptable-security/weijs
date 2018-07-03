@@ -13,7 +13,7 @@ async function main() {
     await contract.set('0xdeadbeef', { from: account });
     console.log('Decimals:', (await contract.get()).output);
 
-    await contract.setFirst(['0xcafebabe', '0x1234567890'], {from: account});
+    await contract.setFirst(['0xcafebabe'], {from: account});
     console.log('Decimals:', (await contract.get()).output);
 }
 
