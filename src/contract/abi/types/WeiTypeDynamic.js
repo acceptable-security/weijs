@@ -42,15 +42,7 @@ class WeiTypeDynamic {
     }
 
     size() {
-        if ( this.data instanceof Buffer ) {
-            return this.data.length;
-        }
-        else if ( this.data instanceof Array ) {
-            return this.data.map((x) => x.length).reduce((total, part) => total + part, 0);
-        }
-        else {
-            throw new Error("Unable to parse internal data");
-        }
+        return this.data.length;
     }
 
     encode() {
@@ -77,6 +69,8 @@ class WeiTypeDynamic {
 
                 tmp = Buffer.concat([tmp, Buffer.from(pad)]);
             }
+
+
 
             return tmp;
         }

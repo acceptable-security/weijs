@@ -88,6 +88,10 @@ class WeiContractFunction {
             }
 
             res['txReceipt'] = await this._wei.rpc.eth.getTransactionReceipt(res['txHash']);
+
+            if ( res['txReceipt']['status'] == '0x0' ) {
+                throw new Error('Transaction returned status 0');
+            }
         }
 
         return res;

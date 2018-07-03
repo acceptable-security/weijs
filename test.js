@@ -8,13 +8,13 @@ async function main() {
     await contract.deploy(SimpleStorage.bytecode, '0x1234567890', { from: account });
     console.log(contract.address);
 
-    console.log('Decimals:', (await contract.get()).output);
+    console.log('Output 1:', (await contract.get()).output[0].toString(16));
 
     await contract.set('0xdeadbeef', { from: account });
-    console.log('Decimals:', (await contract.get()).output);
+    console.log('Output 2:', (await contract.get()).output[0].toString(16));
 
     await contract.setFirst(['0xcafebabe'], {from: account});
-    console.log('Decimals:', (await contract.get()).output);
+    console.log('Output 3:', (await contract.get()).output[0].toString(16));
 }
 
 // Fuck you too nodejs.

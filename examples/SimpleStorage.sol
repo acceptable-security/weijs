@@ -11,9 +11,10 @@ contract SimpleStorage {
         storedData = x;
     }
 
-    function setFirst(uint[] x) public {
+    function setFirst(uint[] x) public returns (uint256) {
         require(x.length > 0);
         storedData = x[0];
+        return x[0];
     }
 
     function get() public view returns (uint) {
