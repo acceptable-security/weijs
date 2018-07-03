@@ -40,6 +40,8 @@ class WeiContract extends EventEmitter {
     // Deploy the contract
     async deploy(code, ... args) {
         const txObj = WeiUtil.isObj(args[args.length - 1]) ? args.pop() : {};
+
+        console.log(txObj);
         txObj.data = code;
 
         // Add the arguments to the end of the code

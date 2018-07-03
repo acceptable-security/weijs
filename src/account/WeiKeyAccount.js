@@ -25,7 +25,7 @@ class WeiKeyAccount extends WeiAccount {
     }
 
     get address() {
-        return WeiUtil.hexBuff(WeiUtil.hash(this.publicKey).slice(-20));
+        return WeiUtil.hex(WeiUtil.hash(this.publicKey).slice(-20));
     }
 
     async nonce() {

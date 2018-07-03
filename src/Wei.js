@@ -1,4 +1,4 @@
-const WeiRPCAccount = require('./account/WeiRPCAccount');
+const WeiAccountManager = require('./account/WeiAccountManager');
 
 const WeiRPC = require('./WeiRPC.js');
 const WeiContract = require('./contract/WeiContract.js');
@@ -31,12 +31,14 @@ class Wei {
         }
 
         this.rpc = new WeiRPC(this);
-    }
+        this.accounts = new WeiAccountManager(this);
 
-    async accounts() {
-        const addresses = await this.rpc.eth.accounts();
-
-        return addresses.map((address) => new WeiRPCAccount(this, address));
+        // Add the RPC accounts
+        this.rpc.eth.accounts().then((addresses) => {
+            for ( const address of addresses ) {
+                this.accounts.addRPCAccount(address);
+            }
+        });
     }
 
     contract(abi) {

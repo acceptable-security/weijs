@@ -18,7 +18,7 @@ class WeiEventABI {
     }
 
     sig() {
-        return WeiUtil.hexBuff(WeiUtil.hash(this.signature));
+        return WeiUtil.hex(WeiUtil.hash(this.signature));
     }
 
     decode(logs) {

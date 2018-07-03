@@ -1,4 +1,6 @@
 const WeiRLP = require('./WeiRLP.js');
+const BN = require('bn.js');
+const WeiUtil = require('../WeiUtil.js');
 
 class WeiTransaction {
     constructor(from, to, data = '', gas = 9000000, value = 0, nonce = 0, gasPrice = undefined) {
@@ -50,13 +52,16 @@ class WeiTransaction {
 
     // Serialize to Object
     toObject() {
-        return {
-            from: this.from,
-            gas: this.gas,
-            to: this.to,
-            value: this.value,
-            data: this.data
+        const tx = {
+            from: this.from
         };
+
+        if ( this.gas ) tx.gas = WeiUtil.hex(this.gas);
+        if ( this.value ) tx.value = WeiUtil.hex(this.value);
+        if ( this.to ) tx.to = this.to;
+        if ( this.data ) tx.data = WeiUtil.hex(this.data);
+
+        return tx;
     }
 
     static fromObject(obj) {

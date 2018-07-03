@@ -1,3 +1,4 @@
+const BN = require('bn.js');
 const keccack = require('keccak');
 
 module.exports = {
@@ -6,7 +7,15 @@ module.exports = {
     hash: (data) => {
         return keccack('keccak256').update(data).digest();
     },
-    hexBuff: (data) => {
+    hex: (data) => {
+        if ( typeof data == 'number' ) {
+            data = new BN(data);
+        }
+
+        if ( data instanceof BN ) {
+            data = data.toBuffer('be');
+        }
+
         data = data.toString('hex');
 
         if ( data.length % 2 != 0 ) {
