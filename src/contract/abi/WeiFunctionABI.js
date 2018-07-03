@@ -25,15 +25,10 @@ class WeiFunctionABI {
         // Offsets for the dynamic section
         let currOffset = staticSection;
 
-        // Parsed args
-        const parsed = [];
-
         // Encode static section
         for ( let i = 0; i < this.inputs.length; i++ ) {
             const input = this.inputs[i];
             const parse = input.parse(args[i]);
-
-            parsed.push(parse);
 
             if ( input.isStatic ) {
                 output = Buffer.concat([output, parse.encode()]);
