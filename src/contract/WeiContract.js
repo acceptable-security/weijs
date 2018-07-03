@@ -42,6 +42,7 @@ class WeiContract extends EventEmitter {
         const txObj = WeiUtil.isObj(args[args.length - 1]) ? args.pop() : {};
         txObj.data = code;
 
+        // Add the arguments to the end of the code
         if ( args.length > 0 ) {
             txObj.data = Buffer.concat([ txObj.data, this._constructor.abi.encode(args) ]);
         }
@@ -85,6 +86,7 @@ class WeiContract extends EventEmitter {
                 break;
             case "constructor":
                 this._constructor = new WeiContractFunction(this._wei, obj);
+                break;
             default:
                 console.warn("Unsupported type", obj.type, obj);
                 break;
