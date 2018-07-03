@@ -15,7 +15,6 @@ class WeiRPCAccount extends WeiAccount {
     }
 
     async sendTransaction(transaction) {
-        console.log(transaction.toObject());
         return await this._wei.rpc.eth.sendTransaction(transaction.toObject());
     }
 }

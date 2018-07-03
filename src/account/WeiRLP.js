@@ -9,16 +9,31 @@ class WeiRLP {
         if ( typeof data == 'number' ) {
             // Special byte
             if ( data >= 0x00 && data <= 0x7F ) {
+                if ( data == 0x00 ) {
+                    return Buffer.from([ 0x80 ]);
+                }
+                
                 return Buffer.from([ data ]);
             }
 
             data = (new BN(data)).toBuffer('be');
         }
         else if ( typeof data == 'string' ) {
-            data = Buffer.from(data, 'utf8');
+            if ( data.substring(0, 2) == '0x' ) {
+                data = Buffer.from(data.substring(2), 'hex');
+            }
+            else {
+                data = Buffer.from(data, 'utf8');
+            }
         }
         else if ( typeof data == 'boolean' ) {
-            return data ? 0x01 : 0x80;
+            return Buffer.from([ data ? 0x01 : 0x80 ]);
+        }
+        else if ( typeof data == 'undefined' ) {
+            return Buffer.from([ 0x80 ]);
+        }
+        else if ( data instanceof BN ) {
+            data = data.toBuffer('be');
         }
 
         if ( data instanceof Buffer ) {
@@ -45,12 +60,12 @@ class WeiRLP {
             }
             else if ( elements.length <= 55 ) {
                 // Short list
-                return Buffer.concat([ Buffer.from(0xC0 + elements.length), elements]);
+                return Buffer.concat([ Buffer.from([0xC0 + elements.length]), elements]);
             }
             else {
                 // Long list
                 const lenBuff = (new BN(elements.length)).toBuffer('be');
-                return Buffer.concat([ Buffer.from([0xF7 + lenBuff.length]), lenBuff, data]);
+                return Buffer.concat([ Buffer.from([0xF7 + lenBuff.length]), lenBuff, elements]);
             }
         }
         else {

@@ -17,13 +17,22 @@ class WeiFunctionABI {
 
     encode(args /*, packed = false */) {
         // Start with first 4 bytes of function signature
-        let output = WeiUtil.hash(this.signature).slice(0, 4);
+        let output;
+
+        if ( this.abi.name ) {
+            output = WeiUtil.hash(this.signature).slice(0, 4);
+        }
+        else {
+            output = Buffer.from([]);
+        }
 
         // How many bytes of static section
         const staticSection = this.abi.inputs.length * 32;
 
         // Offsets for the dynamic section
         let currOffset = staticSection;
+
+        let dynamic = Buffer.from([]);
 
         // Encode static section
         for ( let i = 0; i < this.inputs.length; i++ ) {
@@ -34,13 +43,25 @@ class WeiFunctionABI {
                 output = Buffer.concat([output, parse.encode()]);
             }
             else {
+                // Size of the parsed output as a 32 byte big endian number
+                const size = (new BN(parse.size())).toBuffer('be', 32);
+                
+                // Offset of the data in dynamic section
                 const offset = (new BN(currOffset)).toBuffer('be', 32);
                 output = Buffer.concat([output, offset]);
-                currOffset += parse.size();
+
+                // Actual encoded data
+                const encode = parse.encode();
+
+                // Past the size and data
+                currOffset += encode.length + size.length;
+
+                // Add size/encoded to dynamic section
+                dynamic = Buffer.concat([dynamic, size, encode]);
             }
         }
 
-        return output;
+        return Buffer.concat([output, dynamic]);
     }
 
     decode(bin) {

@@ -1,9 +1,8 @@
 const WeiRLP = require('./WeiRLP.js');
-const BN = require('bn.js');
 const WeiUtil = require('../WeiUtil.js');
 
 class WeiTransaction {
-    constructor(from, to, data = '', gas = 9000000, value = 0, nonce = 0, gasPrice = undefined) {
+    constructor(from, to, data = '', gas = WeiUtil.DefaultGas, value = 0, nonce = 0, gasPrice = 0) {
         this.from = from;
         this.nonce = nonce;
         this.gasPrice = gasPrice;
@@ -11,17 +10,19 @@ class WeiTransaction {
         this.to = to;
         this.value = value;
         this.data = data;
+
+        this.rlp = new WeiRLP();
     }
 
     // Encode the unsigned version
     encodeUnsigned() {
-        return WeiRLP.encode([
-            this.nonce,
-            this.gasPrice,
-            this.gas,
-            this.to,
-            this.value,
-            this.data
+        return this.rlp.encode([
+            this.nonce || 0,
+            this.gasPrice || 0,
+            this.gas || 0,
+            this.to || '',
+            this.value || 0,
+            this.data || ''
         ]);
     }
 
@@ -37,16 +38,16 @@ class WeiTransaction {
 
     // Encode the full transaction
     encode() {
-        return WeiRLP.encode([
-            this.nonce,
-            this.gasPrice,
-            this.gas,
-            this.to,
-            this.value,
+        return this.rlp.encode([
+            this.nonce || 0,
+            this.gasPrice || 0,
+            this.gas || 0,
+            this.to || '',
+            this.value || 0,
             this.data,
+            this.v,
             this.r,
-            this.s,
-            this.v
+            this.s
         ]);
     }
 
@@ -56,10 +57,10 @@ class WeiTransaction {
             from: this.from
         };
 
-        if ( this.gas ) tx.gas = WeiUtil.hex(this.gas);
+        if ( this.gas )   tx.gas   = WeiUtil.hex(this.gas);
         if ( this.value ) tx.value = WeiUtil.hex(this.value);
-        if ( this.to ) tx.to = this.to;
-        if ( this.data ) tx.data = WeiUtil.hex(this.data);
+        if ( this.to )    tx.to    = this.to;
+        if ( this.data )  tx.data  = WeiUtil.hex(this.data);
 
         return tx;
     }
@@ -69,7 +70,7 @@ class WeiTransaction {
             obj.from,
             obj.to,
             obj.data || '',
-            obj.gas || 9000000,
+            obj.gas || WeiUtil.DefaultGas,
             obj.value || 0,
             obj.nonce || 0,
             obj.gasPrice || undefined

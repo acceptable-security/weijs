@@ -24,6 +24,10 @@ class WeiContract extends EventEmitter {
 
     // Load the address
     at(address) {
+        if ( !address) {
+            return this;
+        }
+
         this.address = address;
 
         for ( const event in this.events ) {
@@ -41,12 +45,17 @@ class WeiContract extends EventEmitter {
     async deploy(code, ... args) {
         const txObj = WeiUtil.isObj(args[args.length - 1]) ? args.pop() : {};
 
-        console.log(txObj);
         txObj.data = code;
 
         // Add the arguments to the end of the code
         if ( args.length > 0 ) {
-            txObj.data = Buffer.concat([ txObj.data, this._constructor.abi.encode(args) ]);
+            if ( !this._constructor ) {
+                throw new Error("Passed args for a constructor that doesn't exist");
+            }
+
+            const encodedArgs = this._constructor.abi.encode(args);
+
+            txObj.data = Buffer.concat([ txObj.data,  encodedArgs]);
         }
 
         let hash;
@@ -67,8 +76,8 @@ class WeiContract extends EventEmitter {
         }
 
         // Load our address from receipt
-        const receipt = await this._wei.rpc.getTransactionReceipt(hash);
-        this.address = receipt['contractAddress'];
+        const receipt = await this._wei.rpc.eth.getTransactionReceipt(hash);
+        this.at(receipt['contractAddress']);
 
         return this;
     }
@@ -89,6 +98,10 @@ class WeiContract extends EventEmitter {
             case "constructor":
                 this._constructor = new WeiContractFunction(this._wei, obj);
                 break;
+            case "fallback":
+                this._payableFallback = obj.payable;
+                // TODO - use this information somewhere
+                break;
             default:
                 console.warn("Unsupported type", obj.type, obj);
                 break;
@@ -100,7 +113,7 @@ class WeiContract extends EventEmitter {
     _initShims() {
         // Expose functions directly and inject address
         for ( const fn in this.functions ) {
-            this[fn] = this.functions[fn].exec;
+            this[fn] = (... args) => this.functions[fn].exec(... args);
         }
 
         // Expose events directly

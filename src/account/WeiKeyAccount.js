@@ -1,3 +1,4 @@
+const BN = require('bn.js');
 const crypto = require('crypto');
 const secp256k1 = require('secp256k1');
 const WeiUtil = require('../WeiUtil.js');
@@ -7,7 +8,7 @@ class WeiKeyAccount extends WeiAccount {
     constructor(wei, privateKey) {
         super(wei);
 
-        this.privateKey = privateKey;
+        this.privateKey = Buffer.from(privateKey, 'hex');
     }
 
     static create(wei) {
@@ -21,7 +22,7 @@ class WeiKeyAccount extends WeiAccount {
     }   
 
     get publicKey() {
-        return this.publicKeyCreate(this.privateKey);
+        return secp256k1.publicKeyCreate(this.privateKey, false).slice(1);
     }
 
     get address() {
@@ -29,7 +30,8 @@ class WeiKeyAccount extends WeiAccount {
     }
 
     async nonce() {
-        return this._wei.rpc.eth.getTransactionCount(this.address, 'latest');
+        const raw = await this._wei.rpc.eth.getTransactionCount(this.address, 'latest');
+        return (new BN(raw.substring(2), 16)).toNumber();
     }
 
     sign(msg) {
@@ -52,7 +54,8 @@ class WeiKeyAccount extends WeiAccount {
             transaction.gasPrice = Buffer.from(rawGas.substring(2), 'hex');
         }
 
-        const encoded = transaction.sign(this).encode();
+        const encoded = WeiUtil.hex(transaction.sign(this).encode());
+
         return await this._wei.rpc.eth.sendRawTransaction(encoded);
     }
 }

@@ -58,11 +58,27 @@ class WeiTypeDynamic {
             let tmp = Buffer.from([]);
 
             for ( const element of this.data ) {
-                tmp = tmp.concat(element.encode());
+                const encode = element.encode();
+                tmp = Buffer.concat([tmp, encode]);
             }
+
+            return tmp;
         }
         else if ( this.data instanceof Buffer ) {
-            return this.data;
+            let tmp = this.data;
+
+            if ( this.data.length % 32 != 0 ) {
+                const amt = 32 - (this.data.length % 32);
+                const pad = [];
+
+                for ( let i = 0; i < amt; i++ ) {
+                    pad.push(0);
+                }
+
+                tmp = Buffer.concat([tmp, Buffer.from(pad)]);
+            }
+
+            return tmp;
         }
         else {
             throw new Error("Unable to encode internal data");

@@ -4,6 +4,8 @@ const keccack = require('keccak');
 module.exports = {
     isObj: (data) => data instanceof Object && !(data instanceof Array),
 
+    DefaultGas: 900000,
+
     hash: (data) => {
         return keccack('keccak256').update(data).digest();
     },

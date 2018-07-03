@@ -55,6 +55,7 @@ class WeiAccountManager {
         const account = new WeiRPCAccount(this._wei, address);
 
         this.addAccount(account);
+        return account;
     }
 
     addKeyAccount(privateKey) {
@@ -65,6 +66,15 @@ class WeiAccountManager {
         const account = new WeiKeyAccount(this._wei, privateKey);
 
         this.addAccount(account);
+        return account;
+    }
+
+    newKeyAccount() {
+        const account = WeiKeyAccount.create(this._wei);
+
+        this.addAccount(account);
+
+        return account;
     }
 }
 

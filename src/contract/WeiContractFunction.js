@@ -47,6 +47,8 @@ class WeiContractFunction {
 
     async exec(... args) {
         const txObj = args.length > 0 ? args.pop() : {};
+
+        // Put in the transaction arguments from the ABI/other places
         txObj['to'] = txObj['to'] || this._address;
         txObj['const'] = txObj['const'] == undefined ? this.constant : txObj['const'];
 
@@ -54,11 +56,17 @@ class WeiContractFunction {
             throw new Error("Last argument to a function must be the txobj");
         }
 
-    
         const encode = this.abi.encode(args);
         const res = {};
 
         defaultToHex(txObj, 'data', encode);
+
+        // Load sender and make sure txObj is well formed
+        const sender = txObj['from'];
+
+        if ( sender instanceof WeiAccount ) {
+            txObj['from'] = sender.address;
+        }
 
         // Get output of function - this works even on non-constant functions
         // TODO - does this introduce a race condition where the output can be different
@@ -68,8 +76,6 @@ class WeiContractFunction {
 
         // If not a constant function, send transaction.
         if ( !txObj['const'] ) {
-            const sender = txObj['from'];
-
             // Execute the transaction and find the receipt
             if ( typeof sender == 'string') {
                 res['txHash'] = await this._wei.rpc.eth.sendTransaction(txObj);                

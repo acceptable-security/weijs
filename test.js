@@ -1,14 +1,20 @@
+const SimpleStorage = require('./examples/SimpleStorage.js');
 const Wei = require('./src/Wei.js');
 const wei = new Wei("http://localhost:8545");
-const ERC20 = require('./examples/erc20.js');
 
 async function main() {
-    const token = new ERC20(wei, '0x8d12a197cb00d4747a1fe03395095ce2a5cc6819');
-    const emit = await token.contract.Transfer.listen(1 * 1000);
-    
-    emit.on('event', (obj) => {
-    	console.log("Transfer", obj['_value'].toString(), "from", '0x' + obj['_from'].toString(16), "to", '0x' + obj['_to'].toString(16));
-    });   
+    const contract = wei.contract(SimpleStorage.abi);
+    const account = wei.accounts.newKeyAccount();
+    await contract.deploy(SimpleStorage.bytecode, '0x1234567890', { from: account });
+    console.log(contract.address);
+
+    console.log('Decimals:', (await contract.get()).output);
+
+    await contract.set('0xdeadbeef', { from: account });
+    console.log('Decimals:', (await contract.get()).output);
+
+    await contract.setFirst(['0xcafebabe', '0x1234567890'], {from: account});
+    console.log('Decimals:', (await contract.get()).output);
 }
 
 // Fuck you too nodejs.
