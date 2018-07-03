@@ -1,3 +1,5 @@
+const WeiAccount = require('../account/WeiAccount.js');
+const WeiTransaction = require('../account/WeiTransaction.js');
 const WeiContractEvent = require('./WeiContractEvent.js');
 const WeiContractFunction = require('./WeiContractFunction.js');
 
@@ -35,8 +37,31 @@ class WeiContract extends EventEmitter {
     }
 
     // Deploy the contract
-    deploy(/* code */) {
-        throw new Error("Function not yet implemented");
+    async deploy(code, sender) {
+        const txObj = {
+            data: code
+        };
+
+        let hash;
+
+        // Deploy contract and get transaction hash
+        if ( typeof sender == 'string') {
+            txObj['from'] = sender;
+            hash = await this._wei.rpc.eth.sendTransaction(txObj);                
+        }
+        else if ( sender instanceof WeiAccount ) {
+            txObj['from'] = sender.address;
+            hash = await sender.sendTransaction(WeiTransaction.fromObject(txObj));
+        }
+        else {
+            throw new Error("Unknown sender field of transaction");
+        }
+
+        // Load our address from receipt
+        const receipt = await this._wei.rpc.getTransactionReceipt(hash);
+        this.address = receipt['contractAddress'];
+
+        return this;
     }
 
     // Initialize the ABI objects

@@ -1,3 +1,5 @@
+const WeiRPCAccount = require('./account/WeiRPCAccount');
+
 const WeiRPC = require('./WeiRPC.js');
 const WeiContract = require('./contract/WeiContract.js');
 
@@ -29,6 +31,12 @@ class Wei {
         }
 
         this.rpc = new WeiRPC(this);
+    }
+
+    async accounts() {
+        const addresses = await this.rpc.eth.accounts();
+
+        return addresses.map((address) => new WeiRPCAccount(this, address));
     }
 
     contract(abi) {

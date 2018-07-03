@@ -1,12 +1,17 @@
 const WeiAccount = require('./WeiAccount.js');
 
-class WeiKeyAccount extends WeiAccount {
-    constructor(wei, number) {
+class WeiRPCAccount extends WeiAccount {
+    constructor(wei, address = undefined, number = undefined) {
         super(wei);
 
-        wei.rpc.eth.accounts().then((accounts) => {
-            this.address = accounts[number];
-        });
+        if ( address ) {
+        	this.address = address;
+        }
+        else {
+	        wei.rpc.eth.accounts().then((accounts) => {
+	            this.address = accounts[number || 0];
+	        });
+        }
     }
 
     async sendTransaction(transaction) {
@@ -14,4 +19,4 @@ class WeiKeyAccount extends WeiAccount {
     }
 }
 
-module.exports = WeiKeyAccount;
+module.exports = WeiRPCAccount;
