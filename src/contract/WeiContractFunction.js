@@ -46,7 +46,7 @@ class WeiContractFunction {
     }
 
     async exec(... args) {
-        const txObj = args.length > 0 ? args[args.length - 1] : {};
+        const txObj = args.length > 0 ? args.pop() : {};
         txObj['to'] = txObj['to'] || this._address;
         txObj['const'] = txObj['const'] == undefined ? this.constant : txObj['const'];
 

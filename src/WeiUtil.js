@@ -1,6 +1,8 @@
-const keccack = require('keccak256');
+const keccack = require('keccak');
 
-module.export = {
+module.exports = {
+    isObj: (data) => data instanceof Object && !(data instanceof Array);
+
     hash: (data) => {
         return keccack('keccak256').update(data).digest();
     },

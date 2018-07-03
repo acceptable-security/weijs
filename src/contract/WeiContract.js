@@ -2,6 +2,7 @@ const WeiAccount = require('../account/WeiAccount.js');
 const WeiTransaction = require('../account/WeiTransaction.js');
 const WeiContractEvent = require('./WeiContractEvent.js');
 const WeiContractFunction = require('./WeiContractFunction.js');
+const WeiUtil = require('../WeiUtil.js');
 
 const EventEmitter = require('events');
 
@@ -37,12 +38,17 @@ class WeiContract extends EventEmitter {
     }
 
     // Deploy the contract
-    async deploy(code, sender) {
-        const txObj = {
-            data: code
-        };
+    async deploy(code, ... args) {
+        const txObj = WeiUtil.isObj(args[args.length - 1]) ? args.pop() : {};
+        txObj.data = code;
+
+        if ( args.length > 0 ) {
+            txObj.data = Buffer.concat([ txObj.data, this._constructor.abi.encode(args) ]);
+        }
 
         let hash;
+
+        const sender = txObj['from'];
 
         // Deploy contract and get transaction hash
         if ( typeof sender == 'string') {
@@ -77,6 +83,8 @@ class WeiContract extends EventEmitter {
                 eventObj = new WeiContractEvent(this._wei, obj);
                 this.events[eventObj.abi.sig()] = eventObj;
                 break;
+            case "constructor":
+                this._constructor = new WeiContractFunction(this._wei, obj);
             default:
                 console.warn("Unsupported type", obj.type, obj);
                 break;
