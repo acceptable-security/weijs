@@ -1,10 +1,17 @@
 const BN = require('bn.js');
 const WeiType = require('./WeiType.js');
 
+/** A fixed point number. This would be like fixed<M>x<N> or ufixed. */
 class WeiTypeFixed extends WeiType {
+    /**
+     * Create a fixed point number type instance.
+     *
+     * @params {WeiABIType} abiType - The ABI type that generated this instance.
+     * @params {number} input - The argument being handled. Strings that begin with "0x" will be
+     */
     constructor(abiType, input) {
-    	super();
-    	
+        super();
+        
         this.type = abiType;
 
         if ( typeof input != 'number' ) {
@@ -26,10 +33,20 @@ class WeiTypeFixed extends WeiType {
         this.data = joined.mul(exp).toBuffer(32);
     }
 
+    /**
+     * Encode this instance.
+     *
+     * @returns {Buffer} The encoded instance.
+     */
     encode() {
         return this.data;
     }
 
+    /**
+     * Decode this instance.
+     *
+     * @returns {number} The decoded instance.
+     */
     decode() {
         const bn = new BN(this.data);
         const div = (new BN('10')).exp(this.type.fixedLower);

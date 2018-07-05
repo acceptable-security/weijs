@@ -2,10 +2,19 @@ const assert = require('assert');
 const BN = require('bn.js');
 const WeiType = require('./WeiType.js');
 
+/** A number. This would be like uint<M>, address, or int. */
 class WeiTypeNumber extends WeiType {
+    /**
+     * Create a number type instance.
+     *
+     * @params {WeiABIType} abiType - The ABI type that generated this instance.
+     * @params {number|boolean|string|BN} input - The argument being handled. Strings that begin with "0x"
+     * will be converted to hexidecimal, otherwise rejected. booleans will be converted to 1 for true and
+     * 0 for false.
+     */
     constructor(abiType, input) {
-    	super();
-    	
+        super();
+        
         this.type = abiType;
         assert(this.type.isInt || this.type.isAddress || this.type.isBool);
 
@@ -46,10 +55,20 @@ class WeiTypeNumber extends WeiType {
         }
     }
 
+    /**
+     * Encode this instance.
+     *
+     * @returns {Buffer} The encoded instance.
+     */
     encode() {
         return this.data;
     }
 
+    /**
+     * Decode this instance.
+     *
+     * @returns {BN} The decoded instance.
+     */
     decode() {
         if ( this.type.isIntSigned ) {
             return new BN(this.data).fromTwos(this.type.intSize);

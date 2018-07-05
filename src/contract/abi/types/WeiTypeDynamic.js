@@ -1,10 +1,18 @@
 const assert = require('assert');
 const WeiType = require('./WeiType.js');
 
+/** A dynamically sized array. This includes strings and bytes, or T[] style. */
 class WeiTypeDynamic extends WeiType {
+    /**
+     * Create a dynamic type instance.
+     *
+     * @params {WeiABIType} abiType - The ABI type that generated this instance.
+     * @params {(string|Buffer|Array)} input - The argument being handled. Strings that begin with "0x" 
+     * will be treated as hexidecimal strings. If its an T[]
+     */
     constructor(abiType, input) {
-    	super();
-    	
+        super();
+        
         this.type = abiType;
 
         assert(this.type.isDynamicArray || this.type.isDynamicType);
@@ -44,10 +52,21 @@ class WeiTypeDynamic extends WeiType {
         }
     }
 
+    /**
+     * Get the size of the data inside. If it's an array thats the amount of members,
+     * and if it is a string/bytes, then it is the amount of data.
+     *
+     * @returns {number} The amount of data.
+     */
     size() {
         return this.data.length;
     }
 
+    /**
+     * Encode this instance. The data inside is for the dynamic section, not the static.
+     *
+     * @returns {Buffer} The encoded instance.
+     */
     encode() {
         if ( this.data instanceof Array ) {
             let tmp = Buffer.from([]);
@@ -80,6 +99,11 @@ class WeiTypeDynamic extends WeiType {
         }
     }
 
+    /**
+     * Decode this instance. The data needed is from the dynamic section, not the static.
+     *
+     * @returns {Buffer} The decoded instance.
+     */
     decode() {
         if ( this.data instanceof Array ) {
             let tmp = [];
