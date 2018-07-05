@@ -59,8 +59,8 @@ class WeiAccountManager {
     }
 
     addKeyAccount(privateKey) {
-        if ( typeof privateKey != 'string' ) {
-            throw new Error("WeiAccountManager.addKeyAccount only takes strings");
+        if ( typeof privateKey != 'string' && !(privateKey instanceof Buffer) ) {
+            throw new Error("WeiAccountManager.addKeyAccount only takes strings and buffers");
         }
 
         const account = new WeiKeyAccount(this._wei, privateKey);

@@ -33,11 +33,18 @@ class Wei {
         this.rpc = new WeiRPC(this);
         this.accounts = new WeiAccountManager(this);
 
-        // Add the RPC accounts
-        this.rpc.eth.accounts().then((addresses) => {
-            for ( const address of addresses ) {
-                this.accounts.addRPCAccount(address);
-            }
+        // Promise to load accounts.
+        this.accountsPromise = new Promise((resolve, reject) => {
+            // Add the RPC accounts
+            this.rpc.eth.accounts().then((addresses) => {
+                for ( const address of addresses ) {
+                    this.accounts.addRPCAccount(address);
+                }
+
+                resolve();
+            }).catch(err => {
+                reject(err);
+            });
         });
     }
 

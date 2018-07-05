@@ -8,7 +8,15 @@ class WeiKeyAccount extends WeiAccount {
     constructor(wei, privateKey) {
         super(wei);
 
-        this.privateKey = Buffer.from(privateKey, 'hex');
+        if ( typeof privateKey == 'string' ) {
+            this.privateKey = Buffer.from(privateKey, 'hex');        
+        }
+        else if ( privateKey instanceof Buffer ) {
+            this.privateKey = privateKey;
+        }
+        else {
+            throw new Error("Unknown data passed to WeiKeyAccount for private key. Must be string or Buffer.");
+        }
     }
 
     static create(wei) {
