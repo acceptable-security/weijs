@@ -70,8 +70,6 @@ class WeiTypeDynamic {
                 tmp = Buffer.concat([tmp, Buffer.from(pad)]);
             }
 
-
-
             return tmp;
         }
         else {

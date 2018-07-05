@@ -62,7 +62,7 @@ class WeiRPC {
     }
 
     async modules() {
-        return await this.wei.provider('rpc_modules', []);
+        return await this.wei.provider.rpc('rpc_modules', []);
     }
 
     _loadRPCGetters() {
