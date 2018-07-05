@@ -76,7 +76,11 @@ class WeiRPC {
         return await this.wei.provider.rpc('rpc_modules', []);
     }
 
-    /** Privaet Method. Initiate RPC shims */
+    /**
+     * Initiate RPC shims
+     *
+     * @private
+     */
     _loadRPCGetters() {
         // Create a series of getters 
         for ( const name of WeiRPCMethods ) {       

@@ -2,12 +2,11 @@ const assert = require('assert');
 const WeiRLP = require('../src/account/WeiRLP');
 
 describe('WeiRLP', function() {
-    const rlp = new WeiRLP();
 
     describe('#encode', function() {
         function testEncoding(description, arg, actual) {
             it(description, function () {
-                const encoding = rlp.encode(arg);
+                const encoding = WeiRLP.encode(arg);
                 assert(encoding.equals(Buffer.from(actual)));
             });
         }

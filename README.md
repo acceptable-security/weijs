@@ -1,10 +1,20 @@
-# weijs
+# wei.js
 
 [![Build Status](https://travis-ci.org/block8437/weijs.svg?branch=master)](https://travis-ci.org/block8437/weijs)
 
-A simple to use Ethereum APi
+A simple to use Ethereum API. Intended to be used as a replacement for web3js.
 
-## API Example
+## Documentation
+
+Documentation for the library can be found at [this link](https://block8437.github.io/weijs/). It is currently incomplete, but can serve as a useful reference for the library.
+
+## Examples
+
+Current examples are spread out. The [examples/erc20.js](https://github.com/block8437/weijs/blob/master/examples/erc20.js) is a simple wrapper class around the ERC20 ABI found in [examples/erc20_abi.js](https://github.com/block8437/weijs/blob/master/examples/erc20_abi.js). There is also [test.js](https://github.com/block8437/weijs/blob/master/test.js) which runs a few basic tests that are intended to be integrated into the automated tests suite, however do demonstrate in a few lines a pretty nice range of how to execute the transactions.
+
+### API Example
+
+Below is an archived version of [test.js](https://github.com/block8437/weijs/blob/master/test.js), in the event that it gets moved. It shows how to use a variety of the different classes.
 
 ```javascript
 const SimpleStorage = require('./examples/SimpleStorage.js');
@@ -26,7 +36,6 @@ async function main() {
     console.log('Output 3:', (await contract.get()).output[0].toString(16));
 }
 
-// Fuck you too nodejs.
 // (Calls main as an async function)
 (async () => { await main(); })().then(() => {}).catch(console.error);
 ```

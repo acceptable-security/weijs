@@ -5,7 +5,7 @@
   "main": "src/Wei.js",
   "scripts": {
     "test": "eslint --ignore-path .eslintignore . && ./node_modules/mocha/bin/mocha",
-    "docs": "./node_modules/jsdoc/jsdoc.js src -d docs --readme ./README.md"
+    "docs": "./node_modules/jsdoc/jsdoc.js -r src -d docs --readme ./README.md"
   },
   "author": "",
   "license": "ISC",

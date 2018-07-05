@@ -1,11 +1,19 @@
 const BN = require('bn.js');
 
+/** Static class used for encoding and decoding RLP related data. */
 class WeiRLP {
-    constructor() {
-
-    }
-
-    encode(data) {
+    /**
+     * Encode data into an RLP encoding
+     *
+     * @param {number|string|Array|Buffer|undefined|boolean} data - Data to be encoded with RLP.
+     * Note that if the string starts with 0x, it will be interpretted as a hex
+     * string. The types of the contents of an Array must be of the same argument
+     * types as the {@link WeiRLP#encode}.
+     *
+     * @returns {[Buffer, Buffer]} The first argument is the parsed data, and the second part is
+     * the data that still needs to be parsed.
+     */
+    static encode(data) {
         if ( typeof data == 'number' ) {
             // Special byte
             if ( data >= 0x00 && data <= 0x7F ) {
@@ -52,7 +60,7 @@ class WeiRLP {
             }
         }
         else if ( data instanceof Array ) {
-            const elements = Buffer.concat(data.map((x) => this.encode(x)));
+            const elements = Buffer.concat(data.map((x) => WeiRLP.encode(x)));
 
             if ( elements.length == 0 ) {
                 // Empty list
@@ -73,7 +81,15 @@ class WeiRLP {
         }
     }
 
-    _decode(data) {
+    /**
+     * Recursive decode method, not intended for public use.
+     *
+     * @private
+     *
+     * @params {Buffer} data - Data to be decoded.
+     * @returns {Array|Buffer} Data that has been decoded.
+     */
+    static _decode(data) {
         // Special byte
         if ( data[0] <= 0x7F ) {
             return [ data.slice(0, 1), data.slice(1) ];
@@ -101,7 +117,7 @@ class WeiRLP {
             const list = [];
 
             for ( let i = 0; i < count; i++ ) {
-                const tmp = this._decode(data);
+                const tmp = WeiRLP._decode(data);
 
                 list.push(tmp[0]);
                 data = tmp[1];
@@ -119,7 +135,7 @@ class WeiRLP {
             const list = [];
 
             for ( let i = 0; i < count; i++ ) {
-                const tmp = this._decode(data);
+                const tmp = WeiRLP._decode(data);
 
                 list.push(tmp[0]);
                 data = tmp[1];
@@ -131,8 +147,14 @@ class WeiRLP {
         throw new Error(`Failed to decode byte ${data[0]}`);
     }
 
-    decode(data) {
-        return this._decode(data)[0];
+    /**
+     * Decode RLP encoded data. Note that all RLP strings will be decoded as a buffer.
+     *
+     * @params {Buffer} data - Data to be decoded.
+     * @returns {Array|Buffer} Data that has been decoded.
+     */
+    static decode(data) {
+        return WeiRLP._decode(data)[0];
     }
 }
 

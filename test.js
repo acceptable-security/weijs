@@ -17,6 +17,5 @@ async function main() {
     console.log('Output 3:', (await contract.get()).output[0].toString(16));
 }
 
-// Fuck you too nodejs.
 // (Calls main as an async function)
 (async () => { await main(); })().then(() => {}).catch(console.error);

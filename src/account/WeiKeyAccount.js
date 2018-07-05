@@ -4,6 +4,7 @@ const secp256k1 = require('secp256k1');
 const WeiUtil = require('../WeiUtil.js');
 const WeiAccount = require('./WeiAccount.js');
 
+/** A {@link WeiAccount} generated from a raw private key. */
 class WeiKeyAccount extends WeiAccount {
     constructor(wei, privateKey) {
         super(wei);
@@ -19,6 +20,12 @@ class WeiKeyAccount extends WeiAccount {
         }
     }
 
+    /**
+     * Generate a new private key and instantiate a @{link WeiKeyAccount}.
+     *
+     * @param {Wei} wei - The wei object to use.
+     * @returns {WeiKeyAccount} The created key account.
+     */
     static create(wei) {
         let privateKey;
 
@@ -29,19 +36,44 @@ class WeiKeyAccount extends WeiAccount {
         return new WeiKeyAccount(wei, privateKey);
     }   
 
+    /**
+     * Get the public key of the account.
+     *
+     * @returns {Buffer} The public key of the account.
+     */
     get publicKey() {
         return secp256k1.publicKeyCreate(this.privateKey, false).slice(1);
     }
 
+    /**
+     * Get the address of the account.
+     *
+     * @returns {string} The address of the account.
+     */
     get address() {
         return WeiUtil.hex(WeiUtil.hash(this.publicKey).slice(-20));
     }
 
+    /**
+     * Get the nonce to be used in the transaction of this account.
+     * This is given as the amount of transactions sent by this account as of the
+     * latest block.
+     * 
+     * @returns {number} The nonce of the account.
+     */
     async nonce() {
         const raw = await this._wei.rpc.eth.getTransactionCount(this.address, 'latest');
         return (new BN(raw.substring(2), 16)).toNumber();
     }
 
+    /**
+     * Sign a given message with the loaded private key. This will hash the data using {@link WeiUtil#hash}
+     * and then sign it.
+     *
+     * @param {any} msg - The message to be signed.
+     * @returns {Object} signature - The r, s, and v components of the signature, formatted
+     * in the way that ecsign/ecrrecover would want.
+     */
     sign(msg) {
         const sig = secp256k1.sign(WeiUtil.hash(msg), this.privateKey);
 
@@ -52,6 +84,17 @@ class WeiKeyAccount extends WeiAccount {
         };
     }
 
+    /**
+     * Send a transaction using the account.
+     *
+     * @param {WeiTransaction} transaction - The transaction to send.
+     * @returns {string} The transaction hash of the sent transaction.
+     *
+     * @description This will take the given {@link WeiTransaction}, generate the necessary nonce,
+     * load the gas price from the RPC if necessary, RLP encode the unsigned transaction, sign that,
+     * then store the r/s/v values of the transaction, and then encode that into the RLP signature.
+     * After this it will send the transaction using sendRawTransaction.
+     */
     async sendTransaction(transaction) {
         // Load in the nonce
         transaction.nonce = await this.nonce();
