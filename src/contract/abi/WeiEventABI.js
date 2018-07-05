@@ -3,7 +3,17 @@ const BN = require('bn.js');
 const WeiABIType = require('./WeiABIType.js');
 const WeiUtil = require('../../WeiUtil.js');
 
+/**
+ * A class that wraps an event's ABI.
+ *
+ * @see {@link WeiContractEvent} uses this class to wrap it's ABI.
+ */
 class WeiEventABI {
+    /**
+     * Create an event ABI wrapper.
+     *
+     * @params {Object} abi - The ABI to be wrapped.
+     */
     constructor(abi) {
         this.abi = abi;
         this.name = this.anonymous ? "<anonymous>" : this.abi.name;
@@ -17,10 +27,21 @@ class WeiEventABI {
         this.signature = `${abi.name}(${args})`;
     }
 
+    /**
+     * Get the signature of event as it will appear in topic[0]
+     *
+     * @returns {string} The hashed signature.
+     */
     sig() {
         return WeiUtil.hex(WeiUtil.hash(this.signature));
     }
 
+    /**
+     * Decode a transaction logs from a transaction
+     *
+     * @params {Object} The logs from the transaction.
+     * @returns {Array} The decoded arguments.
+     */
     decode(logs) {
         // Decode data and topics to buffers
         let data = Buffer.from(logs.data.substring(2), 'hex');

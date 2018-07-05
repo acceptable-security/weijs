@@ -1,8 +1,11 @@
 const assert = require('assert');
 const BN = require('bn.js');
+const WeiType = require('./WeiType.js');
 
-class WeiTypeNumber {
+class WeiTypeNumber extends WeiType {
     constructor(abiType, input) {
+    	super();
+    	
         this.type = abiType;
         assert(this.type.isInt || this.type.isAddress || this.type.isBool);
 

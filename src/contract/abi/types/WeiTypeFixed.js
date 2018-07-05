@@ -1,7 +1,10 @@
 const BN = require('bn.js');
+const WeiType = require('./WeiType.js');
 
-class WeiTypeFixed {
+class WeiTypeFixed extends WeiType {
     constructor(abiType, input) {
+    	super();
+    	
         this.type = abiType;
 
         if ( typeof input != 'number' ) {

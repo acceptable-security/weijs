@@ -1,7 +1,10 @@
 const assert = require('assert');
+const WeiType = require('./WeiType.js');
 
-class WeiTypeDynamic {
+class WeiTypeDynamic extends WeiType {
     constructor(abiType, input) {
+    	super();
+    	
         this.type = abiType;
 
         assert(this.type.isDynamicArray || this.type.isDynamicType);

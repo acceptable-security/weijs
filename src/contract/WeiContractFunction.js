@@ -33,6 +33,8 @@ function defaultToHex(obj, name, def) {
  *
  * @param {Object} txObj - The object to validate.
  * @returns {boolean} Whether or not is a proper object.
+ *
+ * @private
  */
 function validateTxObj(txObj) {
     if ( !WeiUtil.isObj(txObj) ) {

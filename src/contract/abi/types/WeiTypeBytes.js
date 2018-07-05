@@ -1,7 +1,10 @@
 const assert = require('assert');
+const WeiType = require('./WeiType.js');
 
-class WeiTypeBytes {
+class WeiTypeBytes extends WeiType {
     constructor(abiType, input) {
+    	super();
+    	
         this.type = abiType;
 
         assert(this.type.isStaticBytes);

@@ -1,4 +1,8 @@
-/** The list of RPC methods that can be used */
+/**
+ * The list of RPC methods that can be used
+ *
+ * @private
+ */
 const WeiRPCMethods = [
     "web3_clientVersion",
     "web3_sha3",

@@ -8,7 +8,13 @@ const WeiTypeTuple   = require('./types/WeiTypeTuple.js');
 
 const WeiDynamicTypes = ['string', 'bytes'];
 
+/** A class that represents a type field from an ABI. */
 class WeiABIType {
+    /**
+     * Create an ABI type object.
+     *
+     * @params {Object} abiType - The ABI type (a member of the inputs/outputs array).
+     */
     constructor(abiType) {
         this.name = abiType.name;
         this.type = abiType.type;
@@ -18,7 +24,9 @@ class WeiABIType {
         this.parseType();
     }
 
-    // Parse the type string into valuable data used later on in encoding/decoding
+    /**
+     * Parse the type string into valuable data used later on in encoding/decoding.
+     */
     parseType() {
         // Parse the array component
         if ( this.type.indexOf("[") > -1 ) {
@@ -103,13 +111,24 @@ class WeiABIType {
         }
     }
     
-    // Is this a static type
+    /**
+     * Is this a static type?
+     *
+     * @returns {boolean} Whether or not this stores its data in the static or dynamic portion of the encoded data.
+     */
     get isStatic() {
         const staticChildren = this.components.map((x) => x.isStatic).reduce((x, y) => x && y, true);
 
         return !this.isDynamicArray && !this.isDynamicType && staticChildren;
     }
 
+    /**
+     * Take a given arg and use this type to produce a {@link WeiType}.
+     *
+     * @params {*} arg - The argument parsing
+     * @params {boolean} forceSimple = false - Used by {link @WeiTypeDynamic} to parse it's innards.
+     * @returns {WeiType} The parsed type.
+     */
     parse(arg, forceSimple = false) {
         if ( !forceSimple && (this.isDynamicType || this.isDynamicArray) ) {
             return new WeiTypeDynamic(this, arg);

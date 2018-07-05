@@ -3,7 +3,18 @@ const BN = require('bn.js');
 const WeiABIType = require('./WeiABIType.js');
 const WeiUtil = require('../../WeiUtil.js');
 
+/**
+ * A class that wraps an function's ABI.
+ *
+ * @see {@link WeiContractFunction} uses this class to wrap it's ABI.
+ */
 class WeiFunctionABI {
+    /**
+     * Create a function ABI wrapper.
+     *
+     * @params {Object} abi - The ABI to be wrapped.
+     */
+
     constructor(abi) {
         this.abi = abi;
         this.inputs = (this.abi.inputs || []).map((x) => new WeiABIType(x));
@@ -15,6 +26,12 @@ class WeiFunctionABI {
         this.signature = `${abi.name || 'constructor'}(${args})`;
     }
 
+    /**
+     * Encode the arguments passed to the function.
+     *
+     * @params {Array} args - The arguments to be encoded.
+     * @returns {Buffer} The encoded arguments.
+     */
     encode(args /*, packed = false */) {
         // Start with first 4 bytes of function signature
         let output;
@@ -64,6 +81,12 @@ class WeiFunctionABI {
         return Buffer.concat([output, dynamic]);
     }
 
+    /**
+     * Decode the result of a function
+     *
+     * @params {Buffer} bin - The encoded results of a function.
+     * @returns {Array} The decoded arguments.
+     */
     decode(bin) {
         let tmp = Buffer.from(bin);
         const outputs = [];
