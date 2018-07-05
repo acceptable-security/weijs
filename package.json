@@ -5,7 +5,7 @@
   "main": "src/Wei.js",
   "scripts": {
     "test": "./test.sh",
-    "docs": "./node_modules/jsdoc/jsdoc.js -r src -d docs --readme ./README.md"
+    "docs": "./node_modules/jsdoc/jsdoc.js --js-version=2 -r src -d docs --readme ./README.md"
   },
   "author": "",
   "license": "ISC",
