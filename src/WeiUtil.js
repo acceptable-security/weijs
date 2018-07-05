@@ -9,30 +9,30 @@ class WeiUtil {
     }
 
     /**
-     * Determine if something is an object, but not an array object
+     * Determine if something is an object, but not an array object.
      * 
-     * @param {any} data - The data to check
-     * @returns {boolean} Whether or not it is an Object
+     * @param {any} data - The data to check.
+     * @returns {boolean} Whether or not it is an Object.
      */
     static isObj(data) {
         return data instanceof Object && !(data instanceof Array);
     }
 
     /**
-     * Take the keccack256 hash of an object
+     * Take the keccack256 hash of an object.
      *
-     * @param {string|Buffer} data - Data to hash
-     * @returns {Buffer} The hashed data
+     * @param {string|Buffer} data - Data to hash.
+     * @returns {Buffer} The hashed data.
      */
     static hash(data) {
         return keccack('keccak256').update(data).digest();
     }
 
     /**
-     * Convert data to hex with 0x in the front
+     * Convert data to hex with 0x in the front.
      * 
-     * @param {string|number|BN|Buffer} data - Data to turn to hex
-     * @returns {string} Hexified data
+     * @param {string|number|BN|Buffer} data - Data to turn to hex.
+     * @returns {string} Hexified data.
      */
     static hex(data) {
         if ( typeof data == 'number' ) {

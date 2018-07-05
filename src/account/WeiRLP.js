@@ -8,7 +8,7 @@ class WeiRLP {
      * @param {number|string|Array|Buffer|undefined|boolean} data - Data to be encoded with RLP.
      * Note that if the string starts with 0x, it will be interpretted as a hex
      * string. The types of the contents of an Array must be of the same argument
-     * types as the {@link WeiRLP#encode}.
+     * types as the {@link WeiRLP.encode}.
      *
      * @returns {[Buffer, Buffer]} The first argument is the parsed data, and the second part is
      * the data that still needs to be parsed.

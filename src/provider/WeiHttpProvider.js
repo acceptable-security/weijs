@@ -1,12 +1,24 @@
 const request = require('request');
 const WeiProvider = require("./WeiProvider.js");
 
+/** A {@link WeiProvider} that uses the HTTP RPC. */
 class WeiHttpProvider extends WeiProvider {
+    /**
+     * Create an HTTP provider.
+     *
+     * @params {string} link - The HTTP address of the RPC.
+     */
     constructor(link) {
         super();
         this.link = link;
     }
 
+    /**
+     * Send data to the RPC.
+     *
+     * @params {string|Object} payload - Data to be sent to the RPC. Will be JSON encoded.
+     * @returns {string} The result from the RPC.
+     */
     async send(payload) {
         return new Promise((resolve, reject) => {
             request.post({

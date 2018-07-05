@@ -11,10 +11,10 @@ const Web3ProviderClasses = [
     "IpcProivder"
 ];
 
-/** Global class for the WeiJS library */
+/** Global class for the WeiJS library. */
 class Wei {
     /**
-     * Create a weijs instance
+     * Create a weijs instance.
      *
      * @param {Web3.HttpProvider|Web3.IpcProvider|string} provider - The provider being used for RPC requests. Either a web3 provider that can be wrapper or a string that can be parsed into a provider.
      */
@@ -59,7 +59,7 @@ class Wei {
     }
 
     /**
-     * Instantiate a contract class
+     * Instantiate a contract class.
      *
      * @param {Object} abi - The abi of the class you wish to use.
      */

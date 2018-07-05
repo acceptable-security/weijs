@@ -114,7 +114,7 @@ class WeiAccountManager {
     }
 
     /**
-     * Use the {@link WeiKeyAccount#create} method to create a new {@link WeiKeyAccount} and add it
+     * Use the {@link WeiKeyAccount.create} method to create a new {@link WeiKeyAccount} and add it
      * to the account manager.
      *
      * @returns {WeiKeyAccount} The created account.

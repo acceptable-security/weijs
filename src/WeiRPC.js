@@ -58,9 +58,9 @@ const WeiRPCMethods = [
 
 class WeiRPC {
     /**
-     * Create an RPC helper class
+     * Create an RPC helper class.
      *
-     * @param {Wei} - The global wei class to be used for requests
+     * @param {Wei} - The global wei class to be used for requests.
      */
     constructor(wei) {
         this.wei = wei;
@@ -68,16 +68,16 @@ class WeiRPC {
     }
 
     /**
-     * Request the modules loaded in the RPC
+     * Request the modules loaded in the RPC.
      *
-     * @returns {Object} A key value pair, where keys are the modules and values are their version
+     * @returns {Object} A key value pair, where keys are the modules and values are their version.
      */
     async modules() {
         return await this.wei.provider.rpc('rpc_modules', []);
     }
 
     /**
-     * Initiate RPC shims
+     * Initiate RPC shims.
      *
      * @private
      */
