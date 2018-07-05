@@ -11,7 +11,7 @@ class WeiUtil {
     /**
      * Determine if something is an object, but not an array object.
      * 
-     * @param {any} data - The data to check.
+     * @param {*} data - The data to check.
      * @returns {boolean} Whether or not it is an Object.
      */
     static isObj(data) {
@@ -31,7 +31,7 @@ class WeiUtil {
     /**
      * Convert data to hex with 0x in the front.
      * 
-     * @param {string|number|BN|Buffer} data - Data to turn to hex.
+     * @param {(string|number|BN|Buffer)} data - Data to turn to hex.
      * @returns {string} Hexified data.
      */
     static hex(data) {

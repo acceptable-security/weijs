@@ -2,15 +2,17 @@ const BN = require('bn.js');
 const WeiABI = require('./abi/WeiFunctionABI.js');
 const WeiAccount = require('../account/WeiAccount.js');
 const WeiTransaction = require('../account/WeiTransaction.js');
+const WeiUtil = require('../WeiUtil.js');
 
-function evenPad(hex) {
-    if ( hex.length % 2 != 0 ) {
-        hex = '0' + hex;
-    }
-
-    return hex;
-}
-
+/** 
+ * Convert a key to hex, if not present using a default parameter.
+ *
+ * @param {Object} obj - Object to operate on.
+ * @param {string} name - Name of the key to check.
+ * @param {*} def - Default parameter if not found on the obj.
+ *
+ * @private
+ */
 function defaultToHex(obj, name, def) {
     obj[name] = obj[name] || new BN(def);
 
@@ -19,10 +21,10 @@ function defaultToHex(obj, name, def) {
             obj[name] = new BN(obj[name]);
         }
 
-        obj[name] = '0x' + evenPad(obj[name].toString(16));
+        obj[name] = WeiUtil.hex(obj[name]);
     }
     else if ( def instanceof Buffer) {
-        obj[name] = '0x' + evenPad((obj[name] || def).toString('hex'));
+        obj[name] = WeiUtil.hex(obj[name] || def);
     }
 }
 

@@ -5,7 +5,7 @@ class WeiWeb3Provider extends WeiProvider {
     /**
      * Create a provider that wraps a Web3 provider.
      *
-     * @params {Web3.HttpProvider|Web3.IpcProvider} provider - The Web3 provider.
+     * @params {(Web3.HttpProvider|Web3.IpcProvider)} provider - The Web3 provider.
      */
     constructor(provider) {
         super();
@@ -15,7 +15,7 @@ class WeiWeb3Provider extends WeiProvider {
     /**
      * Send data to the Web3 provider. Will call sendAsync and wrap that with a promise.
      *
-     * @params {string|Object} payload - Data to be sent to the RPC.
+     * @params {(string|Object)} payload - Data to be sent to the RPC.
      * @returns {string} The result from the RPC.
      */
     async send(payload) {

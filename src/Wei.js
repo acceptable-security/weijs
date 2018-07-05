@@ -16,7 +16,7 @@ class Wei {
     /**
      * Create a weijs instance.
      *
-     * @param {Web3.HttpProvider|Web3.IpcProvider|string} provider - The provider being used for RPC requests. Either a web3 provider that can be wrapper or a string that can be parsed into a provider.
+     * @param {(Web3.HttpProvider|Web3.IpcProvider|string)} provider - The provider being used for RPC requests. Either a web3 provider that can be wrapper or a string that can be parsed into a provider.
      */
     constructor(provider) {
         // Load provider

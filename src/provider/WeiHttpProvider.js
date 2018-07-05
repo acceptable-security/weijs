@@ -16,7 +16,7 @@ class WeiHttpProvider extends WeiProvider {
     /**
      * Send data to the RPC.
      *
-     * @params {string|Object} payload - Data to be sent to the RPC. Will be JSON encoded.
+     * @params {(string|Object)} payload - Data to be sent to the RPC. Will be JSON encoded.
      * @returns {string} The result from the RPC.
      */
     async send(payload) {

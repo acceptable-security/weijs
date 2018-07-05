@@ -22,7 +22,7 @@ class WeiProvider {
      * Send a properly formatted RPC request.
      *
      * @params {string} method - The method to send.
-     * @params {any} params - The parameteres of the method.
+     * @params {*} params - The parameteres of the method.
      * @returns {string} The result of the RPC method. This is sometimes JSON encoded.
      */
     async rpc(method, params = []) {

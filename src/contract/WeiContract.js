@@ -6,7 +6,19 @@ const WeiUtil = require('../WeiUtil.js');
 
 const EventEmitter = require('events');
 
+/**
+ * A class that wraps a contract and provides useful methods
+ *
+ * @see {@link WeiContractEvent} for how to use contract events.
+ * @see {@link WeiContractFunction} for how to use contract functions.s
+ */
 class WeiContract extends EventEmitter {
+    /**
+     * Create a contract. This by default has no specified address, just an ABI
+     *
+     * @params {Wei} wei - The wei instance to use.
+     * @params {Object} abi - The ABI of the contract.
+     */
     constructor(wei, abi) {
         super();
 
@@ -22,7 +34,12 @@ class WeiContract extends EventEmitter {
         this._initShims();
     }
 
-    // Load the address
+    /**
+     * Specify the address of the {@link WeiContract}
+     *
+     * @params {string} address - Address of the contract.
+     * @returns {WeiContract} Returns itself for chaining.
+     */
     at(address) {
         if ( !address) {
             return this;
@@ -41,7 +58,15 @@ class WeiContract extends EventEmitter {
         return this;
     }
 
-    // Deploy the contract
+    /**
+     * Deploy the contract.
+     * 
+     * @params {Buffer} code - Buffer of the code to be deployed.
+     * @params {*} args - The arguments of the constructor. These are optional
+     * @params {Object} txObj - The last argument must be an object that specifies a transaction object
+     * that can either be parsed by the RPC or by {@link WeiTransaction.fromObject}. The from member can
+     * be either a string of the address or a {@link WeiAccount}.
+     */
     async deploy(code, ... args) {
         const txObj = WeiUtil.isObj(args[args.length - 1]) ? args.pop() : {};
 
@@ -82,7 +107,11 @@ class WeiContract extends EventEmitter {
         return this;
     }
 
-    // Initialize the ABI objects
+    /**
+     * Load helper classes from the ABI.
+     *
+     * @private
+     */
     _initABI() {
         let eventObj;
 
@@ -109,7 +138,11 @@ class WeiContract extends EventEmitter {
         }
     }
 
-    // Create the function/events shims
+    /**
+     * Create helper functions on the contract object to make life easier.
+     *
+     * @private
+     */
     _initShims() {
         // Expose functions directly and inject address
         for ( const fn in this.functions ) {

@@ -28,7 +28,7 @@ class WeiAccountManager {
     /**
      * Get an account stored. Either by index or by address.
      *
-     * @param {number|string} query - Either the index of the account or the address of the associated account
+     * @param {(number|string)} query - Either the index of the account or the address of the associated account
      * @returns {WeiAccount} Returns the result of the query, or null if not found.
      */
     get(query) {

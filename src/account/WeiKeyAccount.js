@@ -70,7 +70,7 @@ class WeiKeyAccount extends WeiAccount {
      * Sign a given message with the loaded private key. This will hash the data using {@link WeiUtil#hash}
      * and then sign it.
      *
-     * @param {any} msg - The message to be signed.
+     * @param {*} msg - The message to be signed.
      * @returns {Object} signature - The r, s, and v components of the signature, formatted
      * in the way that ecsign/ecrrecover would want.
      */

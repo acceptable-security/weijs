@@ -87,7 +87,7 @@ class WeiRLP {
      * @private
      *
      * @params {Buffer} data - Data to be decoded.
-     * @returns {Array|Buffer} Data that has been decoded.
+     * @returns {(Array|Buffer)} Data that has been decoded.
      */
     static _decode(data) {
         // Special byte
@@ -151,7 +151,7 @@ class WeiRLP {
      * Decode RLP encoded data. Note that all RLP strings will be decoded as a buffer.
      *
      * @params {Buffer} data - Data to be decoded.
-     * @returns {Array|Buffer} Data that has been decoded.
+     * @returns {(Array|Buffer)} Data that has been decoded.
      */
     static decode(data) {
         return WeiRLP._decode(data)[0];
