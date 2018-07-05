@@ -62,7 +62,7 @@ class WeiContract extends EventEmitter {
      * Deploy the contract.
      * 
      * @params {Buffer} code - Buffer of the code to be deployed.
-     * @params {*} args - The arguments of the constructor. These are optional
+     * @params {... *} args - The arguments of the constructor. These are optional
      * @params {Object} txObj - The last argument must be an object that specifies a transaction object
      * that can either be parsed by the RPC or by {@link WeiTransaction.fromObject}. The from member can
      * be either a string of the address or a {@link WeiAccount}.

@@ -28,8 +28,14 @@ function defaultToHex(obj, name, def) {
     }
 }
 
+/**
+ * Used to validate that the last parameter of the {@link WeiContractFunction#exec} is a transaction object.
+ *
+ * @param {Object} txObj - The object to validate.
+ * @returns {boolean} Whether or not is a proper object.
+ */
 function validateTxObj(txObj) {
-    if ( typeof txObj != 'object' ) {
+    if ( !WeiUtil.isObj(txObj) ) {
         return false;
     }
 
@@ -40,13 +46,51 @@ function validateTxObj(txObj) {
     return true;
 }
 
+/**
+ * A class that wraps a function for a given contract
+ *
+ * @description When the {@link WeiContract} parses its ABI, it will generate a {@WeiContractFunction}
+ * for each function specified in the ABI. When {@link WeiContract#address} is called, it will automatically 
+ * pass the address down to the events it has generated. {@link WeiContractFunction#exec} is exposed directly
+ * on the {@link WeiContract}. 
+ *
+ * @example
+ * const contract = wei.contract(SimpleStorage.abi);
+ * const account = wei.accounts.newKeyAccount();
+ * await contract.deploy(SimpleStorage.bytecode, '0x1234567890', { from: account });
+ * console.log(contract.address);
+ * 
+ * console.log('Output 1:', (await contract.get()).output[0].toString(16));
+ * 
+ * await contract.set('0xdeadbeef', { from: account });
+ * console.log('Output 2:', (await contract.get()).output[0].toString(16));
+ * 
+ * await contract.setFirst(['0xcafebabe'], {from: account});
+ * console.log('Output 3:', (await contract.get()).output[0].toString(16));
+ */
 class WeiContractFunction {
+    /**
+     * Create a contract function.
+     * 
+     * @params {Wei} wei - The wei instance to use.
+     * @params {Object} abi - The ABI of the function to use.
+     */
     constructor(wei, abi) {
         this._wei = wei;
         this.abi = new WeiABI(abi);
         this.constant = abi.constant;
     }
 
+    /**
+     * Execute the given function.
+     *
+     * @params {... *} args - The arguments of the constructor. These are optional.
+     * @params {Object} txObj - The last argument should be a transaction object,
+     * containing the sender, and gas information. However if you're calling a
+     * constant function and the from field is important to you, the rest will
+     * be loaded in and won't be necessary.
+     * @returns {Object} The result of the function call.
+     */
     async exec(... args) {
         const txObj = args.length > 0 ? args.pop() : {};
 
