@@ -24,10 +24,6 @@ describe('Wei', function() {
             const accounts = wei.accounts;
             const account = wei.accounts.newKeyAccount();
 
-            console.log(account.privateKey.toString('hex'));
-            console.log(account.publicKey.toString('hex'));
-            console.log(account.address);
-            
             assert.equal(accounts.length, 2);
             assert.deepStrictEqual(accounts.get(1), account);
             assert(secp256k1.privateKeyVerify(account.privateKey));
