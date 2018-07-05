@@ -1,8 +1,9 @@
 {
-  "name": "wei.js",
+  "name": "weijs",
   "version": "0.0.1",
   "description": "An alternative Ethereum JavaScript API",
   "main": "src/Wei.js",
+  "author": "Avi Saven",
   "scripts": {
     "test": "./test.sh",
     "docs": "./node_modules/jsdoc/jsdoc.js --js-version=2 -r src -d docs --readme ./README.md"
@@ -22,5 +23,15 @@
     "jsdoc": "^3.5.5",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0"
+  },
+  "directories": {
+    "lib": "src/",
+    "doc": "docs/",
+    "example": "examples/",
+    "test": "test/"
+  },
+  "repository": "https://github.com/block8437/weijs",
+  "engines": {
+    "node": "<=10 >=7"
   }
 }
