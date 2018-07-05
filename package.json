@@ -4,17 +4,20 @@
   "description": "An alternative Ethereum JavaScript API",
   "main": "src/Wei.js",
   "scripts": {
-    "test": "eslint . && ./node_modules/mocha/bin/mocha"
+    "test": "eslint --ignore-path .eslintignore . && ./node_modules/mocha/bin/mocha",
+    "docs": "./node_modules/jsdoc/jsdoc.js src -d docs --readme ./README.md"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bn.js": "^4.11.8",
-    "eslint": "^5.0.1",
     "keccak": "^1.4.0",
-    "mocha": "^5.2.0",
     "request": "^2.87.0",
     "secp256k1": "^3.5.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^5.0.1",
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0"
+  }
 }

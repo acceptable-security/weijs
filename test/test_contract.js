@@ -7,7 +7,6 @@ const secp256k1 = require('secp256k1');
 describe('Wei', function() {
     describe('#accounts', function() {
         it('should correctly load accounts API', async function() {
-            // Load wei and make sure accounts load
             const wei = new Wei("http://localhost:8545");
             await wei.accountsPromise;
 
@@ -17,7 +16,6 @@ describe('Wei', function() {
         });
 
         it('should be able to create a new key account', async function() {
-            // Load wei and make sure accounts load
             const wei = new Wei("http://localhost:8545");
             await wei.accountsPromise;
 
