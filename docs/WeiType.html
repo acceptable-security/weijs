@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: WeiWeb3Provider</title>
+    <title>JSDoc: Class: WeiType</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: WeiWeb3Provider</h1>
+    <h1 class="page-title">Class: WeiType</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>WeiWeb3Provider<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>WeiType<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">A <a href="WeiProvider.html">WeiProvider</a> object that can wrap a Web3 provider.</div>
+            <div class="class-description">A generic type instance.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="WeiWeb3Provider"><span class="type-signature"></span>new WeiWeb3Provider<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="WeiType"><span class="type-signature"></span>new WeiType<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,15 @@
 
 
 <div class="description">
-    Create a provider that wraps a Web3 provider.
+    The subclasses of <a href="WeiType.html">WeiType</a> are instances of a type. For example, <a href="WeiABIType.html">WeiABIType</a>
+would be used represent that the argument to a function is a uint256, however, <a href="WeiTypeNumber.html">WeiTypeNumber</a> would
+be used to represent a 0x1234 that someone wants to pass to that function. It would be created by
+<a href="WeiABIType.html#parse">WeiABIType#parse</a> in <a href="WeiFunctionABI.html#encode">WeiFunctionABI#encode</a>, and then encoded using <a href="WeiType.html#encode">WeiType#encode</a>
+so that it can be put in a transaction.
+
+Internally most of the <a href="WeiType.html">WeiType</a> subclasses store their arguments as Buffers (by reducing the input
+types down to it) so that encoding is usually a matter of returning the internal buffer, and decoding
+is a matter of parsing the internal buffer to a relevant type (e.g. a BN for <a href="WeiTypeNumber.html">WeiTypeNumber</a>).
 </div>
 
 
@@ -97,7 +105,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="provider_WeiWeb3Provider.js.html">provider/WeiWeb3Provider.js</a>, <a href="provider_WeiWeb3Provider.js.html#line4">line 4</a>
+        <a href="contract_abi_types_WeiType.js.html">contract/abi/types/WeiType.js</a>, <a href="contract_abi_types_WeiType.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -151,7 +159,7 @@
     
 
     
-    <h4 class="name" id="send"><span class="type-signature">(async) </span>send<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="decode"><span class="type-signature">(abstract) </span>decode<span class="signature">()</span><span class="type-signature"> &rarr; {*}</span></h4>
     
 
     
@@ -159,7 +167,7 @@
 
 
 <div class="description">
-    Send data to the Web3 provider. Will call sendAsync and wrap that with a promise.
+    Decode this instance
 </div>
 
 
@@ -203,7 +211,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="provider_WeiWeb3Provider.js.html">provider/WeiWeb3Provider.js</a>, <a href="provider_WeiWeb3Provider.js.html#line21">line 21</a>
+        <a href="contract_abi_types_WeiType.js.html">contract/abi/types/WeiType.js</a>, <a href="contract_abi_types_WeiType.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -230,7 +238,7 @@
 
         
 <div class="param-desc">
-    The result from the RPC.
+    The decoded instance, of relevant type.
 </div>
 
 
@@ -241,7 +249,115 @@
     </dt>
     <dd>
         
-<span class="param-type">string</span>
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="encode"><span class="type-signature">(abstract) </span>encode<span class="signature">()</span><span class="type-signature"> &rarr; {Buffer}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Encode this instance.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="contract_abi_types_WeiType.js.html">contract/abi/types/WeiType.js</a>, <a href="contract_abi_types_WeiType.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The encoded instance.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Buffer</span>
 
 
     </dd>

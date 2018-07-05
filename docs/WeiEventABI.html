@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: WeiRPC</title>
+    <title>JSDoc: Class: WeiEventABI</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: WeiRPC</h1>
+    <h1 class="page-title">Class: WeiEventABI</h1>
 
     
 
@@ -28,7 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>WeiRPC<span class="signature">(wei)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>WeiEventABI<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">A class that wraps an event's ABI.</div>
         
     
 </header>
@@ -39,9 +41,11 @@
         
 
     
+    <h2>Constructor</h2>
+    
 
     
-    <h4 class="name" id="WeiRPC"><span class="type-signature"></span>new WeiRPC<span class="signature">(wei)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="WeiEventABI"><span class="type-signature"></span>new WeiEventABI<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +53,7 @@
 
 
 <div class="description">
-    Create an RPC helper class.
+    Create an event ABI wrapper.
 </div>
 
 
@@ -58,55 +62,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>wei</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Wei.html">Wei</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The global wei class to be used for requests.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -142,12 +97,19 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WeiRPC.js.html">WeiRPC.js</a>, <a href="WeiRPC.js.html#line69">line 69</a>
+        <a href="contract_abi_WeiEventABI.js.html">contract/abi/WeiEventABI.js</a>, <a href="contract_abi_WeiEventABI.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="WeiContractEvent.html">WeiContractEvent</a> uses this class to wrap it's ABI.</li>
+        </ul>
+    </dd>
     
 
     
@@ -196,7 +158,7 @@
     
 
     
-    <h4 class="name" id="modules"><span class="type-signature">(async) </span>modules<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="decode"><span class="type-signature"></span>decode<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -204,7 +166,7 @@
 
 
 <div class="description">
-    Request the modules loaded in the RPC.
+    Decode a transaction logs from a transaction
 </div>
 
 
@@ -248,7 +210,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WeiRPC.js.html">WeiRPC.js</a>, <a href="WeiRPC.js.html#line79">line 79</a>
+        <a href="contract_abi_WeiEventABI.js.html">contract/abi/WeiEventABI.js</a>, <a href="contract_abi_WeiEventABI.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -275,7 +237,7 @@
 
         
 <div class="param-desc">
-    A key value pair, where keys are the modules and values are their version.
+    The decoded arguments.
 </div>
 
 
@@ -286,7 +248,115 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sig"><span class="type-signature"></span>sig<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get the signature of event as it will appear in topic[0]
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="contract_abi_WeiEventABI.js.html">contract/abi/WeiEventABI.js</a>, <a href="contract_abi_WeiEventABI.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The hashed signature.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
 
 
     </dd>

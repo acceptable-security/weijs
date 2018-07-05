@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Wei.js</title>
+    <title>JSDoc: Source: contract/abi/types/WeiTypeBytes.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Wei.js</h1>
+    <h1 class="page-title">Source: contract/abi/types/WeiTypeBytes.js</h1>
 
     
 
@@ -26,77 +26,84 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const WeiAccountManager = require('./account/WeiAccountManager');
+            <pre class="prettyprint source linenums"><code>const assert = require('assert');
+const WeiType = require('./WeiType.js');
 
-const WeiRPC = require('./WeiRPC.js');
-const WeiContract = require('./contract/WeiContract.js');
-
-const WeiHttpProvider = require("./provider/WeiHttpProvider");
-const WeiWeb3Provider = require("./provider/WeiHttpProvider");
-
-const Web3ProviderClasses = [
-    "HttpProivder",
-    "IpcProivder"
-];
-
-/** Global class for the WeiJS library. */
-class Wei {
+/** A constant size bytes array. This would be like bytes&lt;M> where 0 &lt;= M &lt;= 32. */
+class WeiTypeBytes extends WeiType {
     /**
-     * Create a weijs instance.
+     * Create a bytes type instance.
      *
-     * @param {(Web3.HttpProvider|Web3.IpcProvider|string)} provider - The provider being used for RPC requests. Either a web3 provider that can be wrapper or a string that can be parsed into a provider.
+     * @params {WeiABIType} abiType - The ABI type that generated this instance.
+     * @params {(string|Buffer)} input - The argument being handled. Strings that begin with "0x" will be
      */
-    constructor(provider) {
-        // Load provider
-        if ( typeof a == "object" ) {
-            // Handle web3 wrapper
-            if ( Web3ProviderClasses.indexOf(provider.constructor.name) >= 0 ) {
-                this.provider = new WeiWeb3Provider(provider);              
+    constructor(abiType, input) {
+        super();
+        
+        this.type = abiType;
+
+        assert(this.type.isStaticBytes);
+
+        if ( typeof input == 'string' ) {
+            if ( input.substring(0, 2) == '0x' ) {
+                input = Buffer.from(input.substring(2), 'hex');
             }
             else {
-                throw new Error("Unknown provider object passed to constructor");
-            }
-        }
-        else if ( typeof provider == "string" ) {
-            // Load string based providers
-            if ( provider.substring(0, 4) == "http" ) {
-                this.provider = new WeiHttpProvider(provider);
-            }
-            else {
-                throw new Error(`Unknown provider string "${provider}" passed to constructor`);
+                input = Buffer.from(input, 'utf8');
             }
         }
 
-        // Create helper classes
-        this.rpc = new WeiRPC(this);
-        this.accounts = new WeiAccountManager(this);
+        if ( !(input instanceof Buffer) ) {
+            throw new Error("Unable to handle unknown input type");
+        }
 
-        // Promise to load accounts.
-        this.accountsPromise = new Promise((resolve, reject) => {
-            // Add the RPC accounts
-            this.rpc.eth.accounts().then((addresses) => {
-                for ( const address of addresses ) {
-                    this.accounts.addRPCAccount(address);
-                }
+        if ( input.length > this.type.byteCount ) {
+            throw new Error(`Can't take a buffer of ${input.length} for a ${this.type.byteCount} byte type`);
+        }
 
-                resolve();
-            }).catch(err => {
-                reject(err);
-            });
-        });
+        this.data = input;
+        this.pad();
     }
 
     /**
-     * Instantiate a contract class.
+     * Pads the internal buffer to 32 bytes.
      *
-     * @param {Object} abi - The abi of the class you wish to use.
+     * @private
      */
-    contract(abi) {
-        return new WeiContract(this, abi);
+    pad() {
+        if ( this.data.length % 32 != 0 ) {
+            // Pad the input to 32 byte alignment
+            const pad = [];
+
+            for ( let i = 0; i &lt; this.data.length % 32; i++ ) {
+                pad.push(0);
+            }
+
+            this.data = this.data.concat(Buffer.from(pad));
+        }
+    }
+
+    /**
+     * Encode this instance.
+     *
+     * @returns {Buffer} The encoded instance.
+     */
+    encode() {
+        return this.data;
+    }
+
+
+    /**
+     * Decode this instance.
+     *
+     * @returns {Buffer} The decoded instance.
+     */
+    decode() {
+        return this.data;
     }
 }
 
-module.exports = Wei;</code></pre>
+module.exports = WeiTypeBytes;</code></pre>
         </article>
     </section>
 
