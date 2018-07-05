@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Wei</title>
+    <title>JSDoc: Class: WeiContractFunction</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Wei</h1>
+    <h1 class="page-title">Class: WeiContractFunction</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Wei<span class="signature">(provider)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>WeiContractFunction<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Global class for the WeiJS library.</div>
+            <div class="class-description">A class that wraps a function for a given contract</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Wei"><span class="type-signature"></span>new Wei<span class="signature">(provider)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="WeiContractFunction"><span class="type-signature"></span>new WeiContractFunction<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,10 @@
 
 
 <div class="description">
-    Create a weijs instance.
+    When the <a href="WeiContract.html">WeiContract</a> parses its ABI, it will generate a {@WeiContractFunction}
+for each function specified in the ABI. When WeiContract#address is called, it will automatically 
+pass the address down to the events it has generated. <a href="WeiContractFunction.html#exec">WeiContractFunction#exec</a> is exposed directly
+on the <a href="WeiContract.html">WeiContract</a>.
 </div>
 
 
@@ -62,61 +65,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>provider</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Web3.HttpProvider</span>
-|
-
-<span class="param-type">Web3.IpcProvider</span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The provider being used for RPC requests. Either a web3 provider that can be wrapper or a string that can be parsed into a provider.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -152,7 +100,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Wei.js.html">Wei.js</a>, <a href="Wei.js.html#line15">line 15</a>
+        <a href="contract_WeiContractFunction.js.html">contract/WeiContractFunction.js</a>, <a href="contract_WeiContractFunction.js.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -177,6 +125,22 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const contract = wei.contract(SimpleStorage.abi);
+const account = wei.accounts.newKeyAccount();
+await contract.deploy(SimpleStorage.bytecode, '0x1234567890', { from: account });
+console.log(contract.address);
+
+console.log('Output 1:', (await contract.get()).output[0].toString(16));
+
+await contract.set('0xdeadbeef', { from: account });
+console.log('Output 2:', (await contract.get()).output[0].toString(16));
+
+await contract.setFirst(['0xcafebabe'], {from: account});
+console.log('Output 3:', (await contract.get()).output[0].toString(16));</code></pre>
 
 
 
@@ -206,7 +170,7 @@
     
 
     
-    <h4 class="name" id="contract"><span class="type-signature"></span>contract<span class="signature">(abi)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="exec"><span class="type-signature">(async) </span>exec<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -214,7 +178,7 @@
 
 
 <div class="description">
-    Instantiate a contract class.
+    Execute the given function.
 </div>
 
 
@@ -223,55 +187,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>abi</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The abi of the class you wish to use.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -307,7 +222,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Wei.js.html">Wei.js</a>, <a href="Wei.js.html#line66">line 66</a>
+        <a href="contract_WeiContractFunction.js.html">contract/WeiContractFunction.js</a>, <a href="contract_WeiContractFunction.js.html#line94">line 94</a>
     </li></ul></dd>
     
 
@@ -330,6 +245,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The result of the function call.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 

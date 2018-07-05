@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Wei</title>
+    <title>JSDoc: Class: WeiRPCAccount</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Wei</h1>
+    <h1 class="page-title">Class: WeiRPCAccount</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Wei<span class="signature">(provider)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>WeiRPCAccount<span class="signature">(address, {number)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Global class for the WeiJS library.</div>
+            <div class="class-description">A <a href="WeiAccount.html">WeiAccount</a> that wraps an account loaded in the RPC</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Wei"><span class="type-signature"></span>new Wei<span class="signature">(provider)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="WeiRPCAccount"><span class="type-signature"></span>new WeiRPCAccount<span class="signature">(address, {number)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Create a weijs instance.
+    Create a WeiRPCAccount. This can be created either by address or by index
 </div>
 
 
@@ -89,18 +89,12 @@
 
         <tr>
             
-                <td class="name"><code>provider</code></td>
+                <td class="name"><code>address</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Web3.HttpProvider</span>
-|
-
-<span class="param-type">Web3.IpcProvider</span>
-|
-
 <span class="param-type">string</span>
 
 
@@ -111,7 +105,25 @@
 
             
 
-            <td class="description last">The provider being used for RPC requests. Either a web3 provider that can be wrapper or a string that can be parsed into a provider.</td>
+            <td class="description last">Address to create the account from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>{number</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">index - The index of the account (in eth_accounts) to use.</td>
         </tr>
 
     
@@ -152,7 +164,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Wei.js.html">Wei.js</a>, <a href="Wei.js.html#line15">line 15</a>
+        <a href="account_WeiRPCAccount.js.html">account/WeiRPCAccount.js</a>, <a href="account_WeiRPCAccount.js.html#line4">line 4</a>
     </li></ul></dd>
     
 
@@ -206,7 +218,7 @@
     
 
     
-    <h4 class="name" id="contract"><span class="type-signature"></span>contract<span class="signature">(abi)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="sendTransaction"><span class="type-signature">(async) </span>sendTransaction<span class="signature">(transaction)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -214,7 +226,9 @@
 
 
 <div class="description">
-    Instantiate a contract class.
+    This take the <a href="WeiTransaction.html">WeiTransaction</a>, put itself in as
+the from field, parse it to an object, and use eth_sendTransaction
+to send it.
 </div>
 
 
@@ -250,13 +264,13 @@
 
         <tr>
             
-                <td class="name"><code>abi</code></td>
+                <td class="name"><code>transaction</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><a href="WeiTransaction.html">WeiTransaction</a></span>
 
 
             
@@ -266,7 +280,7 @@
 
             
 
-            <td class="description last">The abi of the class you wish to use.</td>
+            <td class="description last">The transaction to send.</td>
         </tr>
 
     
@@ -307,7 +321,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Wei.js.html">Wei.js</a>, <a href="Wei.js.html#line66">line 66</a>
+        <a href="account_WeiRPCAccount.js.html">account/WeiRPCAccount.js</a>, <a href="account_WeiRPCAccount.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -330,6 +344,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The transaction hash of the sent transaction.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 

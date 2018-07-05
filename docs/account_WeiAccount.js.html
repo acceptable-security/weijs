@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: WeiUtil.js</title>
+    <title>JSDoc: Source: account/WeiAccount.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: WeiUtil.js</h1>
+    <h1 class="page-title">Source: account/WeiAccount.js</h1>
 
     
 
@@ -26,66 +26,43 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const BN = require('bn.js');
-const keccack = require('keccak');
-
-/** Helper class with only static utilities that are used by a variety of other classes. */
-class WeiUtil {
-    /** When no gas limit is passed, defaults to this */
-    static get DefaultGas() {
-        return 900000;
-    }
-
+            <pre class="prettyprint source linenums"><code>/** Abstract class that is used for wrapping account related functionalities. */
+class WeiAccount {
     /**
-     * Determine if something is an object, but not an array object.
-     * 
-     * @param {*} data - The data to check.
-     * @returns {boolean} Whether or not it is an Object.
-     */
-    static isObj(data) {
-        return data instanceof Object &amp;&amp; !(data instanceof Array);
-    }
-
-    /**
-     * Take the keccack256 hash of an object.
+     * Create a Wei class. Don't directly call this, instead use one of it's subclasses
      *
-     * @param {string|Buffer} data - Data to hash.
-     * @returns {Buffer} The hashed data.
+     * @param {Wei} wei - The wei object to use
      */
-    static hash(data) {
-        return keccack('keccak256').update(data).digest();
+    constructor(wei) {
+        this._wei = wei;
+
+        if ( this.constructor.name == 'WeiAccount' ) {
+            throw new Error('WeiAccount is a generic class, use a subclass instead');
+        }
     }
 
     /**
-     * Convert data to hex with 0x in the front.
-     * 
-     * @param {(string|number|BN|Buffer)} data - Data to turn to hex.
-     * @returns {string} Hexified data.
+     * Get the balance of this account
+     *
+     * @returns {string} Hex encoded balance of this account
      */
-    static hex(data) {
-        if ( typeof data == 'number' ) {
-            data = new BN(data);
-        }
+    async balance() {
+        return await this._wei.rpc.eth.getBalance(this.address);
+    }
 
-        if ( data instanceof BN ) {
-            data = data.toBuffer('be');
-        }
-
-        if ( typeof data == 'string' ) {
-            data = Buffer.from(data, 'utf8');
-        }
-
-        data = data.toString('hex');
-
-        if ( data.length % 2 != 0 ) {
-            data = '0' + data;
-        }
-
-        return '0x' + data;
+    /**
+     * Send a transaction using the account.
+     *
+     * @abstract
+     * @param {WeiTransaction} transaction - The transaction to send.
+     * @returns {string} The transaction hash of the sent transaction.
+     */
+    async sendTransaction() {
+        throw new Error('WeiAccount is a generic class, use a subclass instead');
     }
 }
 
-module.exports = WeiUtil;</code></pre>
+module.exports = WeiAccount;</code></pre>
         </article>
     </section>
 

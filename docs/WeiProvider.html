@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Wei</title>
+    <title>JSDoc: Class: WeiProvider</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Wei</h1>
+    <h1 class="page-title">Class: WeiProvider</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Wei<span class="signature">(provider)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>WeiProvider<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Global class for the WeiJS library.</div>
+            <div class="class-description">An abstract class for the provider of the Ethereum RPC methods.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Wei"><span class="type-signature"></span>new Wei<span class="signature">(provider)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="WeiProvider"><span class="type-signature"></span>new WeiProvider<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Create a weijs instance.
+    Create a provider. Do not call this directly as this is an abstract class.
 </div>
 
 
@@ -62,61 +62,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>provider</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Web3.HttpProvider</span>
-|
-
-<span class="param-type">Web3.IpcProvider</span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The provider being used for RPC requests. Either a web3 provider that can be wrapper or a string that can be parsed into a provider.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -152,7 +97,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Wei.js.html">Wei.js</a>, <a href="Wei.js.html#line15">line 15</a>
+        <a href="provider_WeiProvider.js.html">provider/WeiProvider.js</a>, <a href="provider_WeiProvider.js.html#line2">line 2</a>
     </li></ul></dd>
     
 
@@ -206,7 +151,7 @@
     
 
     
-    <h4 class="name" id="contract"><span class="type-signature"></span>contract<span class="signature">(abi)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="rpc"><span class="type-signature">(async) </span>rpc<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -214,7 +159,7 @@
 
 
 <div class="description">
-    Instantiate a contract class.
+    Send a properly formatted RPC request.
 </div>
 
 
@@ -223,55 +168,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>abi</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The abi of the class you wish to use.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -307,7 +203,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Wei.js.html">Wei.js</a>, <a href="Wei.js.html#line66">line 66</a>
+        <a href="provider_WeiProvider.js.html">provider/WeiProvider.js</a>, <a href="provider_WeiProvider.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -330,6 +226,136 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The result of the RPC method. This is sometimes JSON encoded.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="send"><span class="type-signature">(async, abstract) </span>send<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Send data to the RPC.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="provider_WeiProvider.js.html">provider/WeiProvider.js</a>, <a href="provider_WeiProvider.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The result from the RPC.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 

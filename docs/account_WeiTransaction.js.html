@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: account/WeiTransaction.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: account/WeiTransaction.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const WeiRLP = require('./WeiRLP.js');
+const WeiUtil = require('../WeiUtil.js');
+
+/** A wrapper class for transaction information */
+class WeiTransaction {
+    /**
+     * Create a transaction object
+     *
+     * @param {string} from - The sending address.
+     * @param {string} to - The receiver address.
+     * @param {buffer} data - The data part of the transaction.
+     * @param {(number|BN)} gas - Amount of gas for the transaction.
+     * @param {(number|BN)} value - Value of the transaction.
+     * @param {(number|BN)} gasPrice - The price of gas for the transaction.
+     */
+    constructor(from, to, data = '', gas = WeiUtil.DefaultGas, value = 0, nonce = 0, gasPrice = 0) {
+        this.from = from;
+        this.nonce = nonce;
+        this.gasPrice = gasPrice;
+        this.gas = gas;
+        this.to = to;
+        this.value = value;
+        this.data = data;
+    }
+
+    /**
+     * Encode an unsigned verison of the transaction
+     *
+     * @private
+     * @returns {Buffer} The encoded unsigned transaction.
+     */
+    encodeUnsigned() {
+        return WeiRLP.encode([
+            this.nonce || 0,
+            this.gasPrice || 0,
+            this.gas || 0,
+            this.to || '',
+            this.value || 0,
+            this.data || ''
+        ]);
+    }
+
+    /**
+     * Sign the current transaction and load the signature.
+     * 
+     * @param {WeiKeyAccount} account - The account to sign with.
+     * @returns {WeiTransaction}
+     */
+    sign(account) {
+        const sig = account.sign(this.encodeUnsigned());
+        this.r = sig.r;
+        this.s = sig.s;
+        this.v = sig.v;
+
+        return this;
+    }
+
+    /**
+     * Encode the full signed transaction in RLP.
+     *
+     * @returns {Buffer} The encoded transaction.
+     */
+    encode() {
+        return WeiRLP.encode([
+            this.nonce || 0,
+            this.gasPrice || 0,
+            this.gas || 0,
+            this.to || '',
+            this.value || 0,
+            this.data,
+            this.v,
+            this.r,
+            this.s
+        ]);
+    }
+
+    /**
+     * Encode the transaction as a JSON object for the RPC.
+     *
+     * @returns {Object} The encoded transaction.
+     */
+    toObject() {
+        const tx = {
+            from: this.from
+        };
+
+        if ( this.gas )   tx.gas   = WeiUtil.hex(this.gas);
+        if ( this.value ) tx.value = WeiUtil.hex(this.value);
+        if ( this.to )    tx.to    = this.to;
+        if ( this.data )  tx.data  = WeiUtil.hex(this.data);
+
+        return tx;
+    }
+
+    /**
+     * Create a transaction from a JSON object.
+     *
+     * @returns {WeiTransaction} The transaction object.
+     */
+    static fromObject(obj) {
+        return new WeiTransaction(
+            obj.from,
+            obj.to,
+            obj.data || '',
+            obj.gas || WeiUtil.DefaultGas,
+            obj.value || 0,
+            obj.nonce || 0,
+            obj.gasPrice || undefined
+        );
+    }
+}
+
+module.exports = WeiTransaction;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Wei.html">Wei</a></li><li><a href="WeiAccount.html">WeiAccount</a></li><li><a href="WeiAccountManager.html">WeiAccountManager</a></li><li><a href="WeiContract.html">WeiContract</a></li><li><a href="WeiContractEvent.html">WeiContractEvent</a></li><li><a href="WeiContractEventListener.html">WeiContractEventListener</a></li><li><a href="WeiContractFunction.html">WeiContractFunction</a></li><li><a href="WeiHttpProvider.html">WeiHttpProvider</a></li><li><a href="WeiKeyAccount.html">WeiKeyAccount</a></li><li><a href="WeiProvider.html">WeiProvider</a></li><li><a href="WeiRLP.html">WeiRLP</a></li><li><a href="WeiRPC.html">WeiRPC</a></li><li><a href="WeiRPCAccount.html">WeiRPCAccount</a></li><li><a href="WeiTransaction.html">WeiTransaction</a></li><li><a href="WeiUtil.html">WeiUtil</a></li><li><a href="WeiWeb3Provider.html">WeiWeb3Provider</a></li></ul><h3>Global</h3><ul><li><a href="global.html#validateTxObj">validateTxObj</a></li><li><a href="global.html#WeiRPCMethods">WeiRPCMethods</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jul 05 2018 15:17:38 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: WeiUtil.js</title>
+    <title>JSDoc: Source: provider/WeiProvider.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: WeiUtil.js</h1>
+    <h1 class="page-title">Source: provider/WeiProvider.js</h1>
 
     
 
@@ -26,66 +26,44 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const BN = require('bn.js');
-const keccack = require('keccak');
-
-/** Helper class with only static utilities that are used by a variety of other classes. */
-class WeiUtil {
-    /** When no gas limit is passed, defaults to this */
-    static get DefaultGas() {
-        return 900000;
-    }
-
+            <pre class="prettyprint source linenums"><code>/** An abstract class for the provider of the Ethereum RPC methods. */
+class WeiProvider {
     /**
-     * Determine if something is an object, but not an array object.
-     * 
-     * @param {*} data - The data to check.
-     * @returns {boolean} Whether or not it is an Object.
+     * Create a provider. Do not call this directly as this is an abstract class.
      */
-    static isObj(data) {
-        return data instanceof Object &amp;&amp; !(data instanceof Array);
+    constructor() {
+        this._id = 0;
     }
 
     /**
-     * Take the keccack256 hash of an object.
+     * Send data to the RPC.
      *
-     * @param {string|Buffer} data - Data to hash.
-     * @returns {Buffer} The hashed data.
+     * @params {string} payload - Data to be sent to the RPC.
+     * @returns {string} The result from the RPC.
+     * @abstract
      */
-    static hash(data) {
-        return keccack('keccak256').update(data).digest();
+    async send(/* payload */) {
+        throw new Error("Unimplemented method");
     }
 
-    /**
-     * Convert data to hex with 0x in the front.
-     * 
-     * @param {(string|number|BN|Buffer)} data - Data to turn to hex.
-     * @returns {string} Hexified data.
+    /** 
+     * Send a properly formatted RPC request.
+     *
+     * @params {string} method - The method to send.
+     * @params {*} params - The parameteres of the method.
+     * @returns {string} The result of the RPC method. This is sometimes JSON encoded.
      */
-    static hex(data) {
-        if ( typeof data == 'number' ) {
-            data = new BN(data);
-        }
-
-        if ( data instanceof BN ) {
-            data = data.toBuffer('be');
-        }
-
-        if ( typeof data == 'string' ) {
-            data = Buffer.from(data, 'utf8');
-        }
-
-        data = data.toString('hex');
-
-        if ( data.length % 2 != 0 ) {
-            data = '0' + data;
-        }
-
-        return '0x' + data;
+    async rpc(method, params = []) {
+        return await this.send({
+            "jsonrpc": "2.0",
+            "method": method,
+            "params": params, 
+            "id": this._id++
+        });
     }
 }
 
-module.exports = WeiUtil;</code></pre>
+module.exports = WeiProvider;</code></pre>
         </article>
     </section>
 

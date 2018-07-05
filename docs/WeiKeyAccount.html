@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: WeiUtil</title>
+    <title>JSDoc: Class: WeiKeyAccount</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: WeiUtil</h1>
+    <h1 class="page-title">Class: WeiKeyAccount</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>WeiUtil<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>WeiKeyAccount<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Helper class with only static utilities that are used by a variety of other classes.</div>
+            <div class="class-description">A <a href="WeiAccount.html">WeiAccount</a> generated from a raw private key.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="WeiUtil"><span class="type-signature"></span>new WeiUtil<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="WeiKeyAccount"><span class="type-signature"></span>new WeiKeyAccount<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -93,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WeiUtil.js.html">WeiUtil.js</a>, <a href="WeiUtil.js.html#line5">line 5</a>
+        <a href="account_WeiKeyAccount.js.html">account/WeiKeyAccount.js</a>, <a href="account_WeiKeyAccount.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -141,13 +141,13 @@
 
         
             
-<h4 class="name" id=".DefaultGas"><span class="type-signature">(static) </span>DefaultGas<span class="type-signature"></span></h4>
+<h4 class="name" id="address"><span class="type-signature"></span>address<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    When no gas limit is passed, defaults to this
+    Get the address of the account.
 </div>
 
 
@@ -185,7 +185,69 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WeiUtil.js.html">WeiUtil.js</a>, <a href="WeiUtil.js.html#line7">line 7</a>
+        <a href="account_WeiKeyAccount.js.html">account/WeiKeyAccount.js</a>, <a href="account_WeiKeyAccount.js.html#line53">line 53</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="publicKey"><span class="type-signature"></span>publicKey<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Get the public key of the account.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="account_WeiKeyAccount.js.html">account/WeiKeyAccount.js</a>, <a href="account_WeiKeyAccount.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -213,7 +275,7 @@
     
 
     
-    <h4 class="name" id=".hash"><span class="type-signature">(static) </span>hash<span class="signature">(data)</span><span class="type-signature"> &rarr; {Buffer}</span></h4>
+    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(wei)</span><span class="type-signature"> &rarr; {<a href="WeiKeyAccount.html">WeiKeyAccount</a>}</span></h4>
     
 
     
@@ -221,7 +283,7 @@
 
 
 <div class="description">
-    Take the keccack256 hash of an object.
+    Generate a new private key and instantiate a @{link WeiKeyAccount}.
 </div>
 
 
@@ -257,16 +319,13 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>wei</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
-|
-
-<span class="param-type">Buffer</span>
+<span class="param-type"><a href="Wei.html">Wei</a></span>
 
 
             
@@ -276,7 +335,7 @@
 
             
 
-            <td class="description last">Data to hash.</td>
+            <td class="description last">The wei object to use.</td>
         </tr>
 
     
@@ -317,7 +376,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WeiUtil.js.html">WeiUtil.js</a>, <a href="WeiUtil.js.html#line27">line 27</a>
+        <a href="account_WeiKeyAccount.js.html">account/WeiKeyAccount.js</a>, <a href="account_WeiKeyAccount.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -344,7 +403,7 @@
 
         
 <div class="param-desc">
-    The hashed data.
+    The created key account.
 </div>
 
 
@@ -355,7 +414,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Buffer</span>
+<span class="param-type"><a href="WeiKeyAccount.html">WeiKeyAccount</a></span>
 
 
     </dd>
@@ -373,7 +432,7 @@
     
 
     
-    <h4 class="name" id=".hex"><span class="type-signature">(static) </span>hex<span class="signature">(data)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="nonce"><span class="type-signature">(async) </span>nonce<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
@@ -381,7 +440,9 @@
 
 
 <div class="description">
-    Convert data to hex with 0x in the front.
+    Get the nonce to be used in the transaction of this account.
+This is given as the amount of transactions sent by this account as of the
+latest block.
 </div>
 
 
@@ -392,47 +453,149 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+<dl class="details">
+
     
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="account_WeiKeyAccount.js.html">account/WeiKeyAccount.js</a>, <a href="account_WeiKeyAccount.js.html#line64">line 64</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The nonce of the account.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
 <span class="param-type">number</span>
-|
 
-<span class="param-type">BN</span>
-|
 
-<span class="param-type">Buffer</span>
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sendTransaction"><span class="type-signature">(async) </span>sendTransaction<span class="signature">(transaction)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This will take the given <a href="WeiTransaction.html">WeiTransaction</a>, generate the necessary nonce,
+load the gas price from the RPC if necessary, RLP encode the unsigned transaction, sign that,
+then store the r/s/v values of the transaction, and then encode that into the RLP signature.
+After this it will send the transaction using sendRawTransaction.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>transaction</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WeiTransaction.html">WeiTransaction</a></span>
 
 
             
@@ -442,7 +605,7 @@
 
             
 
-            <td class="description last">Data to turn to hex.</td>
+            <td class="description last">The transaction to send.</td>
         </tr>
 
     
@@ -483,7 +646,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WeiUtil.js.html">WeiUtil.js</a>, <a href="WeiUtil.js.html#line37">line 37</a>
+        <a href="account_WeiKeyAccount.js.html">account/WeiKeyAccount.js</a>, <a href="account_WeiKeyAccount.js.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -510,7 +673,7 @@
 
         
 <div class="param-desc">
-    Hexified data.
+    The transaction hash of the sent transaction.
 </div>
 
 
@@ -539,7 +702,7 @@
     
 
     
-    <h4 class="name" id=".isObj"><span class="type-signature">(static) </span>isObj<span class="signature">(data)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="sign"><span class="type-signature"></span>sign<span class="signature">(msg)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -547,7 +710,8 @@
 
 
 <div class="description">
-    Determine if something is an object, but not an array object.
+    Sign a given message with the loaded private key. This will hash the data using WeiUtil#hash
+and then sign it.
 </div>
 
 
@@ -583,7 +747,7 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>msg</code></td>
             
 
             <td class="type">
@@ -599,7 +763,7 @@
 
             
 
-            <td class="description last">The data to check.</td>
+            <td class="description last">The message to be signed.</td>
         </tr>
 
     
@@ -640,7 +804,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WeiUtil.js.html">WeiUtil.js</a>, <a href="WeiUtil.js.html#line17">line 17</a>
+        <a href="account_WeiKeyAccount.js.html">account/WeiKeyAccount.js</a>, <a href="account_WeiKeyAccount.js.html#line77">line 77</a>
     </li></ul></dd>
     
 
@@ -667,7 +831,8 @@
 
         
 <div class="param-desc">
-    Whether or not it is an Object.
+    signature - The r, s, and v components of the signature, formatted
+in the way that ecsign/ecrrecover would want.
 </div>
 
 
@@ -678,7 +843,7 @@
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">Object</span>
 
 
     </dd>

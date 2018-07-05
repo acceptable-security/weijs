@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: WeiUtil.js</title>
+    <title>JSDoc: Source: provider/WeiWeb3Provider.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: WeiUtil.js</h1>
+    <h1 class="page-title">Source: provider/WeiWeb3Provider.js</h1>
 
     
 
@@ -26,66 +26,41 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const BN = require('bn.js');
-const keccack = require('keccak');
+            <pre class="prettyprint source linenums"><code>const WeiProvider = require("./WeiProvider.js");
 
-/** Helper class with only static utilities that are used by a variety of other classes. */
-class WeiUtil {
-    /** When no gas limit is passed, defaults to this */
-    static get DefaultGas() {
-        return 900000;
-    }
-
+/** A {@link WeiProvider} object that can wrap a Web3 provider. */
+class WeiWeb3Provider extends WeiProvider {
     /**
-     * Determine if something is an object, but not an array object.
-     * 
-     * @param {*} data - The data to check.
-     * @returns {boolean} Whether or not it is an Object.
-     */
-    static isObj(data) {
-        return data instanceof Object &amp;&amp; !(data instanceof Array);
-    }
-
-    /**
-     * Take the keccack256 hash of an object.
+     * Create a provider that wraps a Web3 provider.
      *
-     * @param {string|Buffer} data - Data to hash.
-     * @returns {Buffer} The hashed data.
+     * @params {(Web3.HttpProvider|Web3.IpcProvider)} provider - The Web3 provider.
      */
-    static hash(data) {
-        return keccack('keccak256').update(data).digest();
+    constructor(provider) {
+        super();
+        this.provider = provider;
     }
 
     /**
-     * Convert data to hex with 0x in the front.
-     * 
-     * @param {(string|number|BN|Buffer)} data - Data to turn to hex.
-     * @returns {string} Hexified data.
+     * Send data to the Web3 provider. Will call sendAsync and wrap that with a promise.
+     *
+     * @params {(string|Object)} payload - Data to be sent to the RPC.
+     * @returns {string} The result from the RPC.
      */
-    static hex(data) {
-        if ( typeof data == 'number' ) {
-            data = new BN(data);
-        }
-
-        if ( data instanceof BN ) {
-            data = data.toBuffer('be');
-        }
-
-        if ( typeof data == 'string' ) {
-            data = Buffer.from(data, 'utf8');
-        }
-
-        data = data.toString('hex');
-
-        if ( data.length % 2 != 0 ) {
-            data = '0' + data;
-        }
-
-        return '0x' + data;
+    async send(payload) {
+        return new Promise((resolve, reject) => {
+            payload.sendAsync(payload, (err, res) => {
+                if ( err || !res ) {
+                    reject(err);
+                }
+                else {
+                    resolve(res);
+                }
+            });
+        });
     }
 }
 
-module.exports = WeiUtil;</code></pre>
+module.exports = WeiWeb3Provider;</code></pre>
         </article>
     </section>
 

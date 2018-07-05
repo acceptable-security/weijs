@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Class: WeiContractEventListener</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Class: WeiContractEventListener</h1>
 
     
 
@@ -28,7 +28,9 @@
 
 <header>
     
-        <h2></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>WeiContractEventListener<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">An event listener created by a contract. Used for event handling</div>
         
     
 </header>
@@ -38,7 +40,32 @@
     
         
 
-        
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="WeiContractEventListener"><span class="type-signature"></span>new WeiContractEventListener<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Create an event listener object.
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 <dl class="details">
@@ -68,16 +95,43 @@
     
 
     
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="contract_WeiContractEvent.js.html">contract/WeiContractEvent.js</a>, <a href="contract_WeiContractEvent.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="WeiContractEvent.html">WeiContractEvent</a> for usage.</li>
+        </ul>
+    </dd>
     
 
     
 </dl>
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     </div>
 
@@ -94,18 +148,32 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
+
+    
+        <h3 class="subsection-title">Methods</h3>
 
         
             
-<h4 class="name" id="WeiRPCMethods"><span class="type-signature">(constant) </span>WeiRPCMethods<span class="type-signature"></span></h4>
 
+    
+
+    
+    <h4 class="name" id="cancel"><span class="type-signature"></span>cancel<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
 
 
 
 <div class="description">
-    The list of RPC methods that can be used
+    Cancel the automatic queries.
 </div>
+
+
+
+
+
+
 
 
 
@@ -142,7 +210,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WeiRPC.js.html">WeiRPC.js</a>, <a href="WeiRPC.js.html#line2">line 2</a>
+        <a href="contract_WeiContractEvent.js.html">contract/WeiContractEvent.js</a>, <a href="contract_WeiContractEvent.js.html#line89">line 89</a>
     </li></ul></dd>
     
 
@@ -158,11 +226,17 @@
 
 
 
-        
-    
 
-    
-        <h3 class="subsection-title">Methods</h3>
+
+
+
+
+
+
+
+
+
+
 
         
             
@@ -170,7 +244,7 @@
     
 
     
-    <h4 class="name" id="validateTxObj"><span class="type-signature"></span>validateTxObj<span class="signature">(txObj)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="listen"><span class="type-signature"></span>listen<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -178,7 +252,10 @@
 
 
 <div class="description">
-    Used to validate that the last parameter of the <a href="WeiContractFunction.html#exec">WeiContractFunction#exec</a> is a transaction object.
+    This will repeatedly call query and emit an event when new event is found.
+This will automatically be called by the constructor if the interval is not 0, however,
+if WeiContractEvent#cancel is called, this can be called again to restart the
+checks.
 </div>
 
 
@@ -187,55 +264,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>txObj</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The object to validate.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -271,7 +299,94 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="contract_WeiContractFunction.js.html">contract/WeiContractFunction.js</a>, <a href="contract_WeiContractFunction.js.html#line37">line 37</a>
+        <a href="contract_WeiContractEvent.js.html">contract/WeiContractEvent.js</a>, <a href="contract_WeiContractEvent.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="query"><span class="type-signature">(async) </span>query<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Query for any new events by our filter ID. This means that once an event is found by query, it won't
+appear in any subsequent calls.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="contract_WeiContractEvent.js.html">contract/WeiContractEvent.js</a>, <a href="contract_WeiContractEvent.js.html#line36">line 36</a>
     </li></ul></dd>
     
 
@@ -298,7 +413,7 @@
 
         
 <div class="param-desc">
-    Whether or not is a proper object.
+    An array of the events that have been emitted since the function was last called.
 </div>
 
 
@@ -309,7 +424,7 @@
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">Array</span>
 
 
     </dd>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Wei</title>
+    <title>JSDoc: Class: WeiRLP</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Wei</h1>
+    <h1 class="page-title">Class: WeiRLP</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Wei<span class="signature">(provider)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>WeiRLP<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Global class for the WeiJS library.</div>
+            <div class="class-description">Static class used for encoding and decoding RLP related data.</div>
         
     
 </header>
@@ -45,78 +45,19 @@
     
 
     
-    <h4 class="name" id="Wei"><span class="type-signature"></span>new Wei<span class="signature">(provider)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="WeiRLP"><span class="type-signature"></span>new WeiRLP<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
 
 
 
-<div class="description">
-    Create a weijs instance.
-</div>
 
 
 
 
 
 
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>provider</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Web3.HttpProvider</span>
-|
-
-<span class="param-type">Web3.IpcProvider</span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The provider being used for RPC requests. Either a web3 provider that can be wrapper or a string that can be parsed into a provider.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -152,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Wei.js.html">Wei.js</a>, <a href="Wei.js.html#line15">line 15</a>
+        <a href="account_WeiRLP.js.html">account/WeiRLP.js</a>, <a href="account_WeiRLP.js.html#line4">line 4</a>
     </li></ul></dd>
     
 
@@ -206,7 +147,7 @@
     
 
     
-    <h4 class="name" id="contract"><span class="type-signature"></span>contract<span class="signature">(abi)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".decode"><span class="type-signature">(static) </span>decode<span class="signature">()</span><span class="type-signature"> &rarr; {Array|Buffer}</span></h4>
     
 
     
@@ -214,7 +155,118 @@
 
 
 <div class="description">
-    Instantiate a contract class.
+    Decode RLP encoded data. Note that all RLP strings will be decoded as a buffer.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="account_WeiRLP.js.html">account/WeiRLP.js</a>, <a href="account_WeiRLP.js.html#line156">line 156</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Data that has been decoded.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">Buffer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".encode"><span class="type-signature">(static) </span>encode<span class="signature">(data)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Encode data into an RLP encoding
 </div>
 
 
@@ -250,13 +302,28 @@
 
         <tr>
             
-                <td class="name"><code>abi</code></td>
+                <td class="name"><code>data</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
+|
+
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">Buffer</span>
+|
+
+<span class="param-type">undefined</span>
+|
+
+<span class="param-type">boolean</span>
 
 
             
@@ -266,7 +333,10 @@
 
             
 
-            <td class="description last">The abi of the class you wish to use.</td>
+            <td class="description last">Data to be encoded with RLP.
+Note that if the string starts with 0x, it will be interpretted as a hex
+string. The types of the contents of an Array must be of the same argument
+types as the <a href="WeiRLP.html#.encode">WeiRLP.encode</a>.</td>
         </tr>
 
     
@@ -307,7 +377,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Wei.js.html">Wei.js</a>, <a href="Wei.js.html#line66">line 66</a>
+        <a href="account_WeiRLP.js.html">account/WeiRLP.js</a>, <a href="account_WeiRLP.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -330,6 +400,29 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The first argument is the parsed data, and the second part is
+the data that still needs to be parsed.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
