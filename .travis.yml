@@ -8,8 +8,6 @@ node_js:
   - "10"
   - "9"
   - "8"
-  - "7"
-  - "6"
 
 before_install:
   - sudo apt-get update -qq
@@ -18,3 +16,6 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install geth -y -qq
   - yes | geth --rpcapi eth,web3,personal --rpc --dev &
+
+after_script:
+  - killall geth
