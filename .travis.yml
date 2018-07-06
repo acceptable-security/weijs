@@ -20,4 +20,5 @@ before_install:
   - sudo apt-get install ant -y -qq
 
 after_script:
+  - npm run coveralls
   - killall geth
