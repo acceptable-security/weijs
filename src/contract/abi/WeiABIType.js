@@ -46,6 +46,8 @@ class WeiABIType {
                 // Nothing inside is a dynamic array
                 this.isDynamicArray = true;
             }
+
+            this.isSimpleType = false;
         }
         else {
             this.isSimpleType = true;
@@ -64,10 +66,15 @@ class WeiABIType {
             // uint<M>/int<M>/uint/int based types. Defaults to 256 bits
             this.isInt = true;
             this.intSigned = !this.simpleType.startsWith('u');
-            this.intSize = parseInt(this.simpleType.substring(this.signed ? 3 : 4) || '256');
+            this.intSize = parseInt(this.simpleType.substring(this.intSigned ? 3 : 4) || '256');
 
-            assert(this.intSize % 2 == 0);
-            assert(this.intSize <= 256);
+            if ( this.intSize % 2 != 0 ) {
+                throw new Error(`Can't have integer of uneven size ${this.intSize}`);
+            }
+
+            if ( this.intSize > 256 ) {
+                throw new Error(`Can't have integer of size ${this.intSize}, above maximum of 256`);
+            }
         }
         else if ( this.simpleType.startsWith('bytes') ) {
             // bytes<M> types
