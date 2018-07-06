@@ -16,8 +16,6 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install geth -y -qq
   - yes | geth --rpcapi eth,web3,personal --rpc --dev &
-  - sudo apt-get install default-jdk -y -qq
-  - sudo apt-get install ant -y -qq
 
 after_script:
   - npm run coveralls
