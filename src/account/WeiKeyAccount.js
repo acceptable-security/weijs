@@ -62,7 +62,7 @@ class WeiKeyAccount extends WeiAccount {
      * @returns {number} The nonce of the account.
      */
     async nonce() {
-        const raw = await this._wei.rpc.eth.getTransactionCount(this.address, 'latest');
+        const raw = await this._wei.rpc.eth.getTransactionCount(this.address, 'pending');
         return (new BN(raw.substring(2), 16)).toNumber();
     }
 

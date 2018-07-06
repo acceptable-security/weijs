@@ -25,6 +25,6 @@ describe('WeiRLP', function() {
     });
 
     describe('#decode', function() {
-
+        
     });
 });
