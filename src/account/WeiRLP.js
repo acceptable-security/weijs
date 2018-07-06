@@ -1,4 +1,15 @@
+const assert = require('assert');
 const BN = require('bn.js');
+
+function trimLeadingZero(buffer) {
+    assert(buffer instanceof Buffer);
+
+    while ( buffer[0] == 0 && buffer.length > 0 ) {
+        buffer = buffer.slice(1);
+    }
+
+    return buffer;
+}
 
 /** Static class used for encoding and decoding RLP related data. */
 class WeiRLP {
@@ -45,6 +56,8 @@ class WeiRLP {
         }
 
         if ( data instanceof Buffer ) {
+            data = trimLeadingZero(data);
+
             if ( data.length == 0 ) {
                 // Empty buffer
                 return Buffer.from([ 0x80 ]);
