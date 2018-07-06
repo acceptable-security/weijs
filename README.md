@@ -1,6 +1,7 @@
 # wei.js
 
 [![Build Status](https://travis-ci.org/block8437/weijs.svg?branch=master)](https://travis-ci.org/block8437/weijs)
+[![Coverage Status](https://coveralls.io/repos/github/block8437/weijs/badge.svg?branch=master)](https://coveralls.io/github/block8437/weijs?branch=master)
 
 A simple to use Ethereum API. Intended to be used as a replacement for web3js.
 
