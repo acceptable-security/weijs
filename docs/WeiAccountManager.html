@@ -2,22 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: WeiAccountManager</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>WeiAccountManager - Documentation</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Class: WeiAccountManager</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Tutorials</li><li class="nav-item"><a href="tutorial-install.html">Getting Started</a></li><li class="nav-item"><a href="tutorial-usage.html">Using Wei.js</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Wei.html">Wei</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Wei.html#contract">contract</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiABIType.html">WeiABIType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiABIType.html#parse">parse</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiABIType.html#parseType">parseType</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiAccount.html">WeiAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccount.html#balance">balance</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccount.html#sendTransaction">sendTransaction</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiAccountManager.html">WeiAccountManager</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#addAccount">addAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#addKeyAccount">addKeyAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#addRPCAccount">addRPCAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#has">has</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#newKeyAccount">newKeyAccount</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiContract.html">WeiContract</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContract.html#at">at</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContract.html#deploy">deploy</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiContractEvent.html">WeiContractEvent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEvent.html#createFilter">createFilter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEvent.html#find">find</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEvent.html#listen">listen</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiContractEventListener.html">WeiContractEventListener</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEventListener.html#cancel">cancel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEventListener.html#listen">listen</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEventListener.html#query">query</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiContractFunction.html">WeiContractFunction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractFunction.html#exec">exec</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiEventABI.html">WeiEventABI</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiEventABI.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiEventABI.html#sig">sig</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiFunctionABI.html">WeiFunctionABI</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiFunctionABI.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiFunctionABI.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiHttpProvider.html">WeiHttpProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiHttpProvider.html#send">send</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiKeyAccount.html">WeiKeyAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiKeyAccount.html#.create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiKeyAccount.html#nonce">nonce</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiKeyAccount.html#sendTransaction">sendTransaction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiKeyAccount.html#sign">sign</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiProvider.html">WeiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiProvider.html#rpc">rpc</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiProvider.html#send">send</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiRLP.html">WeiRLP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiRLP.html#.decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiRLP.html#.encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiRPC.html">WeiRPC</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiRPC.html#modules">modules</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiRPCAccount.html">WeiRPCAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiRPCAccount.html#sendTransaction">sendTransaction</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTransaction.html">WeiTransaction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTransaction.html#.fromObject">fromObject</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTransaction.html#encode">encode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTransaction.html#sign">sign</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTransaction.html#toObject">toObject</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiType.html">WeiType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiType.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiType.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeBytes.html">WeiTypeBytes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeBytes.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeBytes.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeDynamic.html">WeiTypeDynamic</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeDynamic.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeDynamic.html#encode">encode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeDynamic.html#size">size</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeFixed.html">WeiTypeFixed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeFixed.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeFixed.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeNumber.html">WeiTypeNumber</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeNumber.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeNumber.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeTuple.html">WeiTypeTuple</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiUtil.html">WeiUtil</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiUtil.html#.hash">hash</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiUtil.html#.hex">hex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiUtil.html#.isObj">isObj</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiWeb3Provider.html">WeiWeb3Provider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiWeb3Provider.html#send">send</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">WeiAccountManager</h1>
+    
 
     
 
@@ -28,7 +41,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>WeiAccountManager<span class="signature">(wei)</span><span class="type-signature"></span></h2>
+        <h2>
+        WeiAccountManager
+        </h2>
         
             <div class="class-description">A helper class to aid in the management and creation of the various WeiAccount subclasses.</div>
         
@@ -39,14 +54,13 @@
     <div class="container-overview">
     
         
+<div class="section-method">
 
     
     <h2>Constructor</h2>
     
 
-    
     <h4 class="name" id="WeiAccountManager"><span class="type-signature"></span>new WeiAccountManager<span class="signature">(wei)</span><span class="type-signature"></span></h4>
-    
 
     
 
@@ -55,63 +69,6 @@
 <div class="description">
     Create an account manager
 </div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>wei</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Wei.html">Wei</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The wei object to use</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
 
 
 
@@ -165,6 +122,56 @@
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>wei</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="Wei.html">Wei</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The wei object to use
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -174,6 +181,14 @@
 
 
 
+
+
+
+
+
+
+
+</div>
     
     </div>
 
@@ -183,9 +198,7 @@
 
     
 
-    
-
-    
+     
 
     
 
@@ -194,6 +207,7 @@
 
         
             
+<div class="section-members">
 <h4 class="name" id="length"><span class="type-signature"></span>length<span class="type-signature"></span></h4>
 
 
@@ -202,8 +216,6 @@
 <div class="description">
     Get the amount of accounts loaded
 </div>
-
-
 
 
 
@@ -254,6 +266,9 @@
 
 
 
+
+</div>
+
         
     
 
@@ -262,12 +277,11 @@
 
         
             
+<div class="section-method">
 
     
 
-    
     <h4 class="name" id="addAccount"><span class="type-signature"></span>addAccount<span class="signature">(account)</span><span class="type-signature"></span></h4>
-    
 
     
 
@@ -276,63 +290,6 @@
 <div class="description">
     Add an <a href="WeiAccount.html">WeiAccount</a> to the account manager. Will ignore duplicates (checked by address).
 </div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>account</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="WeiAccount.html">WeiAccount</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The account being added.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
 
 
 
@@ -386,41 +343,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="addKeyAccount"><span class="type-signature"></span>addKeyAccount<span class="signature">(privateKey)</span><span class="type-signature"> &rarr; {<a href="WeiKeyAccount.html">WeiKeyAccount</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Add an account by private key. This will initiate a <a href="WeiKeyAccount.html">WeiKeyAccount</a> object and add it
-to the account manager.
-</div>
-
-
-
-
-
-
-
-
-
     <h5>Parameters:</h5>
     
 
@@ -446,16 +368,13 @@ to the account manager.
 
         <tr>
             
-                <td class="name"><code>privateKey</code></td>
+                <td class="name"><code>account</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
-|
-
-<span class="param-type">Buffer</span>
+<span class="param-type"><code><a href="WeiAccount.html">WeiAccount</a></code></span>
 
 
             
@@ -465,13 +384,48 @@ to the account manager.
 
             
 
-            <td class="description last">The private key of the account</td>
+            <td class="description last">
+                The account being added.
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="addKeyAccount"><span class="type-signature"></span>addKeyAccount<span class="signature">(privateKey)</span><span class="type-signature"> &rarr; {<a href="WeiKeyAccount.html">WeiKeyAccount</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Add an account by private key. This will initiate a <a href="WeiKeyAccount.html">WeiKeyAccount</a> object and add it
+to the account manager.
+</div>
 
 
 
@@ -525,63 +479,6 @@ to the account manager.
 
 
 
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The created account.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="WeiKeyAccount.html">WeiKeyAccount</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="addRPCAccount"><span class="type-signature"></span>addRPCAccount<span class="signature">(address)</span><span class="type-signature"> &rarr; {<a href="WeiRPCAccount.html">WeiRPCAccount</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Add an RPC account by the address. This will initiate a WeiRPCAccount object and add it
-to the account manager.
-</div>
-
-
-
-
-
-
-
-
-
     <h5>Parameters:</h5>
     
 
@@ -607,13 +504,16 @@ to the account manager.
 
         <tr>
             
-                <td class="name"><code>address</code></td>
+                <td class="name"><code>privateKey</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><code>string</code></span>
+|
+
+<span class="param-type"><code>Buffer</code></span>
 
 
             
@@ -623,13 +523,73 @@ to the account manager.
 
             
 
-            <td class="description last">The address of the account.</td>
+            <td class="description last">
+                The private key of the account
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code><a href="WeiKeyAccount.html">WeiKeyAccount</a></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    The created account.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="addRPCAccount"><span class="type-signature"></span>addRPCAccount<span class="signature">(address)</span><span class="type-signature"> &rarr; {<a href="WeiRPCAccount.html">WeiRPCAccount</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Add an RPC account by the address. This will initiate a WeiRPCAccount object and add it
+to the account manager.
+</div>
 
 
 
@@ -683,62 +643,6 @@ to the account manager.
 
 
 
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The created account.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="WeiRPCAccount.html">WeiRPCAccount</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(query)</span><span class="type-signature"> &rarr; {<a href="WeiAccount.html">WeiAccount</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Get an account stored. Either by index or by address.
-</div>
-
-
-
-
-
-
-
-
-
     <h5>Parameters:</h5>
     
 
@@ -764,16 +668,13 @@ to the account manager.
 
         <tr>
             
-                <td class="name"><code>query</code></td>
+                <td class="name"><code>address</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
-|
-
-<span class="param-type">string</span>
+<span class="param-type"><code>string</code></span>
 
 
             
@@ -783,13 +684,72 @@ to the account manager.
 
             
 
-            <td class="description last">Either the index of the account or the address of the associated account</td>
+            <td class="description last">
+                The address of the account.
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code><a href="WeiRPCAccount.html">WeiRPCAccount</a></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    The created account.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(query)</span><span class="type-signature"> &rarr; {<a href="WeiAccount.html">WeiAccount</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Get an account stored. Either by index or by address.
+</div>
 
 
 
@@ -843,62 +803,6 @@ to the account manager.
 
 
 
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Returns the result of the query, or null if not found.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="WeiAccount.html">WeiAccount</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="has"><span class="type-signature"></span>has<span class="signature">(address)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Determines if the account manager has an account with the given address
-</div>
-
-
-
-
-
-
-
-
-
     <h5>Parameters:</h5>
     
 
@@ -924,13 +828,16 @@ to the account manager.
 
         <tr>
             
-                <td class="name"><code>address</code></td>
+                <td class="name"><code>query</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><code>number</code></span>
+|
+
+<span class="param-type"><code>string</code></span>
 
 
             
@@ -940,13 +847,72 @@ to the account manager.
 
             
 
-            <td class="description last">The address to query.</td>
+            <td class="description last">
+                Either the index of the account or the address of the associated account
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code><a href="WeiAccount.html">WeiAccount</a></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    Returns the result of the query, or null if not found.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="has"><span class="type-signature"></span>has<span class="signature">(address)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Determines if the account manager has an account with the given address
+</div>
 
 
 
@@ -1000,45 +966,105 @@ to the account manager.
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The address to query.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    Whether or not the account was found.
-</div>
 
-
-
-<dl>
+<dl class="param-type">
     <dt>
-        Type
+        Type:
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type"><code>boolean</code></span>
 
 
     </dd>
 </dl>
 
+
+<div class="param-desc">
+    Whether or not the account was found.
+</div>
+
     
+</div>
 
 
 
-
-
+</div>
         
             
+<div class="section-method">
 
     
 
-    
     <h4 class="name" id="newKeyAccount"><span class="type-signature"></span>newKeyAccount<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="WeiKeyAccount.html">WeiKeyAccount</a>}</span></h4>
-    
 
     
 
@@ -1048,14 +1074,6 @@ to the account manager.
     Use the <a href="WeiKeyAccount.html#.create">WeiKeyAccount.create</a> method to create a new <a href="WeiKeyAccount.html">WeiKeyAccount</a> and add it
 to the account manager.
 </div>
-
-
-
-
-
-
-
-
 
 
 
@@ -1090,13 +1108,20 @@ to the account manager.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="account_WeiAccountManager.js.html">account/WeiAccountManager.js</a>, <a href="account_WeiAccountManager.js.html#line122">line 122</a>
+        <a href="account_WeiAccountManager.js.html">account/WeiAccountManager.js</a>, <a href="account_WeiAccountManager.js.html#line123">line 123</a>
     </li></ul></dd>
     
 
     
 
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="WeiKeyAccount.html#.create">WeiKeyAccount.create</a> is internally used.</li>
+        </ul>
+    </dd>
+    
 
     
 </dl>
@@ -1113,33 +1138,42 @@ to the account manager.
 
 
 
+
+
+
+
+
+
+
+
+<div class="section-returns">
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    The created account.
-</div>
 
-
-
-<dl>
+<dl class="param-type">
     <dt>
-        Type
+        Type:
     </dt>
     <dd>
         
-<span class="param-type"><a href="WeiKeyAccount.html">WeiKeyAccount</a></span>
+<span class="param-type"><code><a href="WeiKeyAccount.html">WeiKeyAccount</a></code></span>
 
 
     </dd>
 </dl>
 
+
+<div class="param-desc">
+    The created account.
+</div>
+
     
+</div>
 
 
 
-
-
+</div>
         
     
 
@@ -1155,17 +1189,13 @@ to the account manager.
 
 </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Wei.html">Wei</a></li><li><a href="WeiABIType.html">WeiABIType</a></li><li><a href="WeiAccount.html">WeiAccount</a></li><li><a href="WeiAccountManager.html">WeiAccountManager</a></li><li><a href="WeiContract.html">WeiContract</a></li><li><a href="WeiContractEvent.html">WeiContractEvent</a></li><li><a href="WeiContractEventListener.html">WeiContractEventListener</a></li><li><a href="WeiContractFunction.html">WeiContractFunction</a></li><li><a href="WeiEventABI.html">WeiEventABI</a></li><li><a href="WeiFunctionABI.html">WeiFunctionABI</a></li><li><a href="WeiHttpProvider.html">WeiHttpProvider</a></li><li><a href="WeiKeyAccount.html">WeiKeyAccount</a></li><li><a href="WeiProvider.html">WeiProvider</a></li><li><a href="WeiRLP.html">WeiRLP</a></li><li><a href="WeiRPC.html">WeiRPC</a></li><li><a href="WeiRPCAccount.html">WeiRPCAccount</a></li><li><a href="WeiTransaction.html">WeiTransaction</a></li><li><a href="WeiType.html">WeiType</a></li><li><a href="WeiTypeBytes.html">WeiTypeBytes</a></li><li><a href="WeiTypeDynamic.html">WeiTypeDynamic</a></li><li><a href="WeiTypeFixed.html">WeiTypeFixed</a></li><li><a href="WeiTypeNumber.html">WeiTypeNumber</a></li><li><a href="WeiUtil.html">WeiUtil</a></li><li><a href="WeiWeb3Provider.html">WeiWeb3Provider</a></li></ul>
-</nav>
-
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jul 05 2018 16:09:29 GMT-0400 (Eastern Daylight Time)
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Jul 06 2018 18:03:00 GMT-0400 (Eastern Daylight Time) using the Minami theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
 </body>
 </html>

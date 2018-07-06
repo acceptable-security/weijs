@@ -12,7 +12,7 @@ class WeiEventABI {
     /**
      * Create an event ABI wrapper.
      *
-     * @params {Object} abi - The ABI to be wrapped.
+     * @param {Object} abi - The ABI to be wrapped.
      */
     constructor(abi) {
         this.abi = abi;
@@ -39,8 +39,8 @@ class WeiEventABI {
     /**
      * Decode a transaction logs from a transaction
      *
-     * @params {Object} The logs from the transaction.
-     * @returns {Array} The decoded arguments.
+     * @param {Object} The logs from the transaction.
+     * @returns {Object} The decoded arguments in a key/value pair corresponding to the name/value of the event field.
      */
     decode(logs) {
         // Decode data and topics to buffers

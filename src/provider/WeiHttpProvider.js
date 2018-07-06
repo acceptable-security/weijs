@@ -6,7 +6,7 @@ class WeiHttpProvider extends WeiProvider {
     /**
      * Create an HTTP provider.
      *
-     * @params {string} link - The HTTP address of the RPC.
+     * @param {string} link - The HTTP address of the RPC.
      */
     constructor(link) {
         super();
@@ -16,7 +16,7 @@ class WeiHttpProvider extends WeiProvider {
     /**
      * Send data to the RPC.
      *
-     * @params {(string|Object)} payload - Data to be sent to the RPC. Will be JSON encoded.
+     * @param {(string|Object)} payload - Data to be sent to the RPC. Will be JSON encoded.
      * @returns {string} The result from the RPC.
      */
     async send(payload) {

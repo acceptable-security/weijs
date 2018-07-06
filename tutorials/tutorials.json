@@ -1,0 +1,15 @@
+{
+	"install": {
+		"title": "Getting Started"
+	},
+	"usage": {
+		"title": "Using Wei.js",
+		"children": [ "useaccounts", "usecontracts"]
+	},
+	"useaccounts": {
+		"title": "Accounts"
+	},
+	"usecontracts": {
+		"title": "Contracts (Functions and Events)"
+	}
+}

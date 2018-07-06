@@ -13,7 +13,7 @@ class WeiABIType {
     /**
      * Create an ABI type object.
      *
-     * @params {Object} abiType - The ABI type (a member of the inputs/outputs array).
+     * @param {Object} abiType - The ABI type (a member of the inputs/outputs array).
      */
     constructor(abiType) {
         this.name = abiType.name;
@@ -132,8 +132,8 @@ class WeiABIType {
     /**
      * Take a given arg and use this type to produce a {@link WeiType}.
      *
-     * @params {*} arg - The argument parsing
-     * @params {boolean} forceSimple = false - Used by {link @WeiTypeDynamic} to parse it's innards.
+     * @param {*} arg - The argument parsing
+     * @param {boolean} forceSimple = false - Used by {link @WeiTypeDynamic} to parse it's innards.
      * @returns {WeiType} The parsed type.
      */
     parse(arg, forceSimple = false) {

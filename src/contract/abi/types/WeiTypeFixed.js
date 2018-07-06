@@ -6,8 +6,8 @@ class WeiTypeFixed extends WeiType {
     /**
      * Create a fixed point number type instance.
      *
-     * @params {WeiABIType} abiType - The ABI type that generated this instance.
-     * @params {number} input - The argument being handled. Strings that begin with "0x" will be
+     * @param {WeiABIType} abiType - The ABI type that generated this instance.
+     * @param {number} input - The argument being handled. Strings that begin with "0x" will be
      */
     constructor(abiType, input) {
         super();

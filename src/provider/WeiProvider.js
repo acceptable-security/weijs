@@ -10,7 +10,7 @@ class WeiProvider {
     /**
      * Send data to the RPC.
      *
-     * @params {string} payload - Data to be sent to the RPC.
+     * @param {string} payload - Data to be sent to the RPC.
      * @returns {string} The result from the RPC.
      * @abstract
      */
@@ -21,8 +21,8 @@ class WeiProvider {
     /** 
      * Send a properly formatted RPC request.
      *
-     * @params {string} method - The method to send.
-     * @params {*} params - The parameteres of the method.
+     * @param {string} method - The method to send.
+     * @param {*} params - The parameteres of the method.
      * @returns {string} The result of the RPC method. This is sometimes JSON encoded.
      */
     async rpc(method, params = []) {

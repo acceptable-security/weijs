@@ -6,8 +6,8 @@ class WeiTypeDynamic extends WeiType {
     /**
      * Create a dynamic type instance.
      *
-     * @params {WeiABIType} abiType - The ABI type that generated this instance.
-     * @params {(string|Buffer|Array)} input - The argument being handled. Strings that begin with "0x" 
+     * @param {WeiABIType} abiType - The ABI type that generated this instance.
+     * @param {(string|Buffer|Array)} input - The argument being handled. Strings that begin with "0x" 
      * will be treated as hexidecimal strings. If its an T[]
      */
     constructor(abiType, input) {

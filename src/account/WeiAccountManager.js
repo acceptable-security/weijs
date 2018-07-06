@@ -118,6 +118,7 @@ class WeiAccountManager {
      * to the account manager.
      *
      * @returns {WeiKeyAccount} The created account.
+     * @see {@link WeiKeyAccount.create} is internally used.
      */
     newKeyAccount() {
         const account = WeiKeyAccount.create(this._wei);

@@ -12,7 +12,7 @@ class WeiFunctionABI {
     /**
      * Create a function ABI wrapper.
      *
-     * @params {Object} abi - The ABI to be wrapped.
+     * @param {Object} abi - The ABI to be wrapped.
      */
 
     constructor(abi) {
@@ -63,7 +63,7 @@ class WeiFunctionABI {
     /**
      * Encode the arguments passed to the function.
      *
-     * @params {Array} args - The arguments to be encoded.
+     * @param {Array} args - The arguments to be encoded.
      * @returns {Buffer} The encoded arguments.
      */
     encode(args /*, packed = false */) {
@@ -152,7 +152,7 @@ class WeiFunctionABI {
     /**
      * Decode the result of a function
      *
-     * @params {Buffer} bin - The encoded results of a function.
+     * @param {Buffer} bin - The encoded results of a function.
      * @returns {Array} The decoded arguments.
      */
     decode(bin) {

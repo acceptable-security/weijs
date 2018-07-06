@@ -6,3 +6,4 @@ test.sh
 .eslintignore
 .eslintrc.js
 .travis.yml
+tutorials/

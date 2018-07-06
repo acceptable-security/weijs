@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Contracts (Functions and Events) - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Tutorials</li><li class="nav-item"><a href="tutorial-install.html">Getting Started</a></li><li class="nav-item"><a href="tutorial-usage.html">Using Wei.js</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Wei.html">Wei</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Wei.html#contract">contract</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiABIType.html">WeiABIType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiABIType.html#parse">parse</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiABIType.html#parseType">parseType</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiAccount.html">WeiAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccount.html#balance">balance</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccount.html#sendTransaction">sendTransaction</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiAccountManager.html">WeiAccountManager</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#addAccount">addAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#addKeyAccount">addKeyAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#addRPCAccount">addRPCAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#has">has</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiAccountManager.html#newKeyAccount">newKeyAccount</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiContract.html">WeiContract</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContract.html#at">at</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContract.html#deploy">deploy</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiContractEvent.html">WeiContractEvent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEvent.html#createFilter">createFilter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEvent.html#find">find</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEvent.html#listen">listen</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiContractEventListener.html">WeiContractEventListener</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEventListener.html#cancel">cancel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEventListener.html#listen">listen</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractEventListener.html#query">query</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiContractFunction.html">WeiContractFunction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiContractFunction.html#exec">exec</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiEventABI.html">WeiEventABI</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiEventABI.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiEventABI.html#sig">sig</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiFunctionABI.html">WeiFunctionABI</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiFunctionABI.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiFunctionABI.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiHttpProvider.html">WeiHttpProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiHttpProvider.html#send">send</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiKeyAccount.html">WeiKeyAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiKeyAccount.html#.create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiKeyAccount.html#nonce">nonce</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiKeyAccount.html#sendTransaction">sendTransaction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiKeyAccount.html#sign">sign</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiProvider.html">WeiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiProvider.html#rpc">rpc</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiProvider.html#send">send</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiRLP.html">WeiRLP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiRLP.html#.decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiRLP.html#.encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiRPC.html">WeiRPC</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiRPC.html#modules">modules</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiRPCAccount.html">WeiRPCAccount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiRPCAccount.html#sendTransaction">sendTransaction</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTransaction.html">WeiTransaction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTransaction.html#.fromObject">fromObject</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTransaction.html#encode">encode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTransaction.html#sign">sign</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTransaction.html#toObject">toObject</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiType.html">WeiType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiType.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiType.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeBytes.html">WeiTypeBytes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeBytes.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeBytes.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeDynamic.html">WeiTypeDynamic</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeDynamic.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeDynamic.html#encode">encode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeDynamic.html#size">size</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeFixed.html">WeiTypeFixed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeFixed.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeFixed.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeNumber.html">WeiTypeNumber</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeNumber.html#decode">decode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiTypeNumber.html#encode">encode</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiTypeTuple.html">WeiTypeTuple</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiUtil.html">WeiUtil</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiUtil.html#.hash">hash</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiUtil.html#.hex">hex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiUtil.html#.isObj">isObj</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="WeiWeb3Provider.html">WeiWeb3Provider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="WeiWeb3Provider.html#send">send</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Contracts (Functions and Events)</h1>
+    
+
+    <section>
+
+<header>
+    
+</header>
+
+<article>
+    <h1>Using Contracts</h1><p>Contracts in wei.js are instantiated through the <code>wei.contract</code> interface, which takes a contract ABI. It will return a <code>WeiContract</code> instance, will internally load the ABI to expose a simple to use interface for using and deploying the contract.</p>
+<pre class="prettyprint source lang-javascript"><code>const Wei = require('wei')
+const wei = new Wei(/* provider */);
+const contract = wei.contract(/* abi */);</code></pre><h2>Deployment</h2><p>Once the contract has been instantiated from <code>wei.contract</code> there are two options for using it: deployment or by location. If the contract already exists on the Ethereum blockchain and you want to use it then loading the location can simply be done by calling the <code>.at</code> method. In the example above, you could rpelace the last line with <code>const contract = wei.contract(/* abi */).at(/* address */);</code> in order to do so. From there you can use the functions/events provided.</p>
+<p>However, if the contract has not yet been deployed, and you have the bytecode/Solidity source code, you can deploy the contract using the <code>.deploy</code> function. The first argument is a <code>Buffer</code> containing the bytecode of the contract. The remaining arguments are the arguments to the constructor of the contract. The last argument however must be an object that contains a <code>from</code> key, which points to which account you want to deploy from. Note that the <code>deploy</code> method is an asynchronous function and will return a <code>Promise</code>. See the example below for usage.</p>
+<pre class="prettyprint source"><code>const Wei = require('wei')
+const wei = new Wei(/* provider */);
+await wei.accountsPromise;
+
+const bytecode = Buffer.from(/* bytecode hex */, 'hex'); // Buffer with bytecode
+const account = wei.accounts.get(0); // Deploy from the first account
+const contract = await wei.contract(/* abi */).deploy(bytecode, /* arguments */, { from: acount });
+
+console.log(&quot;Deployed to&quot;, contract.address);</code></pre><h2>Functions</h2><p>Contract functions are exposed directly on the contract objects, with the same names that they are given in the Solidity code. For example, to call the <code>transfer</code> method on an ERC20 token:</p>
+<pre class="prettyprint source lang-javascript"><code>const Wei = require('wei')
+const wei = new Wei(/* provider */);
+await wei.accountsPromise;
+
+const account = wei.accounts.get(0); // Deploy from the first account
+const contract = wei.contract(/* token abi */).at(/* token address */);
+
+const destination = '0x12345...';
+const value = 0x12345....;
+
+await contract.transfer(destination, value, { from: account });
+console.log(&quot;Transfer complete&quot;);</code></pre><p>The table below provides information on how Solidity types and JavaScript will match up. Further documentation on this matter can be seen in the <code>WeiType</code> subclasses.</p>
+<table>
+<thead>
+<tr>
+<th>Solidity Type</th>
+<th>JavaScript Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint/int</td>
+<td>number, buffer, hex string, BN</td>
+</tr>
+<tr>
+<td>ufixed/fixed</td>
+<td>number</td>
+</tr>
+<tr>
+<td>bytes1..32</td>
+<td>buffer, hex string, utf8 string</td>
+</tr>
+<tr>
+<td>string/bytes</td>
+<td>buffer, hex string, utf8 string</td>
+</tr>
+<tr>
+<td>type[]</td>
+<td>array of with correct type</td>
+</tr>
+<tr>
+<td>struct</td>
+<td>an object of field names to values of appropriate type</td>
+</tr>
+</tbody>
+</table>
+<h2>Events</h2><p>Events are also exposed directly through the contract interface as well. Contract events expose two important methods, <code>find</code> and <code>listen</code>. Both of them take a filter object, which allow you to narrow down the events you can hear. If none is passed then all events of that type will be caught, however, for example you may wish to only hear events that reference a certain address. You could accomplish that by specifying an object that has <code>{ myAddressField: '0x...' }</code>, and if an event with a field called <code>myAddressField</code> is thrown, it will only be seen if the address matches that specified in the filter.</p>
+<p>The difference between <code>find</code> and <code>listen</code> is that <code>find</code> will query the RPC once for the events, and get all the historic events, and return them directly. <code>listen</code> on the other hand will repeatedly query the RPC (you can specify the interval at which this is done in the <code>listen</code> arguments). An example is given below of listening for <code>Transfer</code> events from an ERC20 contract from a specific address</p>
+<pre class="prettyprint source lang-javascript"><code>const Wei = require('wei')
+const wei = new Wei(/* provider */);
+await wei.accountsPromise;
+
+const account = wei.accounts.get(0); // Deploy from the first account
+const contract = wei.contract(/* token abi */).at(/* token address */);
+
+contract.Transfer.listen({ _from: '0x12345...' }).on('event', function (event) {
+    console.log(event._from, 'transfered', event._value.toString(), 'tokens to', event._to);
+});</code></pre><p>Further documentation can be seen in the <code>WeiContractEvent</code> and <code>WeiEventABI</code> class documentation.</p>
+</article>
+
+</section>
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Jul 06 2018 18:03:00 GMT-0400 (Eastern Daylight Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

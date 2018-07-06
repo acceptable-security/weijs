@@ -8,10 +8,10 @@ class WeiTransaction {
      *
      * @param {string} from - The sending address.
      * @param {string} to - The receiver address.
-     * @param {buffer} data - The data part of the transaction.
-     * @param {(number|BN)} gas - Amount of gas for the transaction.
-     * @param {(number|BN)} value - Value of the transaction.
-     * @param {(number|BN)} gasPrice - The price of gas for the transaction.
+     * @param {buffer} [data=''] - The data part of the transaction.
+     * @param {(number|BN)} [gas={@link WeiUtil.DefaultGas}] - Amount of gas for the transaction.
+     * @param {(number|BN)} [value=0] - Value of the transaction.
+     * @param {(number|BN)} [gasPrice=0] - The price of gas for the transaction.
      */
     constructor(from, to, data = '', gas = WeiUtil.DefaultGas, value = 0, nonce = 0, gasPrice = 0) {
         this.from = from;

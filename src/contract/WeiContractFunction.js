@@ -74,8 +74,8 @@ class WeiContractFunction {
     /**
      * Create a contract function.
      * 
-     * @params {Wei} wei - The wei instance to use.
-     * @params {Object} abi - The ABI of the function to use.
+     * @param {Wei} wei - The wei instance to use.
+     * @param {Object} abi - The ABI of the function to use.
      */
     constructor(wei, abi) {
         this._wei = wei;
@@ -86,8 +86,8 @@ class WeiContractFunction {
     /**
      * Execute the given function.
      *
-     * @params {... *} args - The arguments of the constructor. These are optional.
-     * @params {Object} txObj - The last argument should be a transaction object,
+     * @param {...*} args - The arguments of the constructor. These are optional.
+     * @param {Object} txObj - The last argument should be a transaction object,
      * containing the sender, and gas information. However if you're calling a
      * constant function and the from field is important to you, the rest will
      * be loaded in and won't be necessary.

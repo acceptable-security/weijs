@@ -7,8 +7,8 @@ class WeiTypeNumber extends WeiType {
     /**
      * Create a number type instance.
      *
-     * @params {WeiABIType} abiType - The ABI type that generated this instance.
-     * @params {number|boolean|string|BN} input - The argument being handled. Strings that begin with "0x"
+     * @param {WeiABIType} abiType - The ABI type that generated this instance.
+     * @param {number|boolean|string|BN} input - The argument being handled. Strings that begin with "0x"
      * will be converted to hexidecimal, otherwise rejected. booleans will be converted to 1 for true and
      * 0 for false.
      */

@@ -16,8 +16,8 @@ class WeiContract extends EventEmitter {
     /**
      * Create a contract. This by default has no specified address, just an ABI
      *
-     * @params {Wei} wei - The wei instance to use.
-     * @params {Object} abi - The ABI of the contract.
+     * @param {Wei} wei - The wei instance to use.
+     * @param {Object} abi - The ABI of the contract.
      */
     constructor(wei, abi) {
         super();
@@ -35,9 +35,9 @@ class WeiContract extends EventEmitter {
     }
 
     /**
-     * Specify the address of the {@link WeiContract}
+     * Specify the address of the {@link WeiContract}.
      *
-     * @params {string} address - Address of the contract.
+     * @param {string} address - Address of the contract.
      * @returns {WeiContract} Returns itself for chaining.
      */
     at(address) {
@@ -61,9 +61,9 @@ class WeiContract extends EventEmitter {
     /**
      * Deploy the contract.
      * 
-     * @params {Buffer} code - Buffer of the code to be deployed.
-     * @params {... *} args - The arguments of the constructor. These are optional
-     * @params {Object} txObj - The last argument must be an object that specifies a transaction object
+     * @param {Buffer} code - Buffer of the code to be deployed.
+     * @param {...*} args - The arguments of the constructor. These are optional
+     * @param {Object} txObj - The last argument must be an object that specifies a transaction object
      * that can either be parsed by the RPC or by {@link WeiTransaction.fromObject}. The from member can
      * be either a string of the address or a {@link WeiAccount}.
      */

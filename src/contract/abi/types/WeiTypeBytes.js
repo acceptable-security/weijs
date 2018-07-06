@@ -6,8 +6,8 @@ class WeiTypeBytes extends WeiType {
     /**
      * Create a bytes type instance.
      *
-     * @params {WeiABIType} abiType - The ABI type that generated this instance.
-     * @params {(string|Buffer)} input - The argument being handled. Strings that begin with "0x" will be
+     * @param {WeiABIType} abiType - The ABI type that generated this instance.
+     * @param {(string|Buffer)} input - The argument being handled. Strings that begin with "0x" will be
      */
     constructor(abiType, input) {
         super();

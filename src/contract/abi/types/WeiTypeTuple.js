@@ -1,6 +1,16 @@
 const WeiType = require('./WeiType.js');
 
+/**
+ * A tuple. This is exposed in solidity as structs.
+ */
 class WeiTypeTuple extends WeiType {
+    /**
+     * Create a tuple type instance
+     *
+     * @param {WeiABIType} abiType - The ABI type that generated this instance.
+     * @param {Object} input - The argument being handled. The keys correspond to the
+     * name of the fields in the struct.
+     */
     constructor(abiType, input) {
     	super();
     	

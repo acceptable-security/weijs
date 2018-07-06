@@ -15,8 +15,8 @@ class WeiType {
     /**
      * Create a generic type instance. Do not call directly.
      *
-     * @params {WeiABIType} abiType - The ABI type that generated this instance.
-     * @params {*} input - The argument being handled. 
+     * @param {WeiABIType} abiType - The ABI type that generated this instance.
+     * @param {*} input - The argument being handled. 
      * @abstract
      */
     constructor() {
