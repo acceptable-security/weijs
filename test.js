@@ -13,8 +13,15 @@ async function main() {
     await contract.set('0xdeadbeef', { from: account });
     console.log('Output 2:', (await contract.get()).output[0].toString(16));
 
-    await contract.setFirst(['0xcafebabe'], {from: account});
+    await contract.setFirst(['0xcafebabe'], { from: account });
     console.log('Output 3:', (await contract.get()).output[0].toString(16));
+
+    await contract.setStructX(123, { x: '0xbeefbeef', y: '0xabcdef' }, { from: account });
+    console.log('Output 4:', (await contract.get()).output[0].toString(16));
+
+
+    await contract.setStructY(123, { x: '0xbeefbeef', y: '0xabcdef' }, { from: account });
+    console.log('Output 5:', (await contract.get()).output[0].toString(16));
 }
 
 // (Calls main as an async function)

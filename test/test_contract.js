@@ -89,5 +89,19 @@ describe('SimpleStorage', function () {
         await contract.setFirst(['0xcafebabe'], {from: account});
 
         assert.equal((await contract.get()).output[0].toString(16), 'cafebabe');
-    })
+    });
+
+    it('should correctly get/set from a struct', async function () {
+        const wei = new Wei("http://localhost:8545");
+
+        const contract = wei.contract(SimpleStorage.abi);
+        const account = wei.accounts.newKeyAccount();
+        await contract.deploy(SimpleStorage.bytecode, '0x1234567890', { from: account });
+
+        await contract.setStructX(123, { x: '0xbeefbeef', y: '0xabcdef' }, { from: account });
+        assert.equal((await contract.get()).output[0].toString(16), 'beefbeef');
+
+        await contract.setStructY(123, { x: '0xbeefbeef', y: '0xabcdef' }, { from: account });
+        assert.equal((await contract.get()).output[0].toString(16), 'abcdef');
+    });
 });

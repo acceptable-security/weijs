@@ -5,15 +5,21 @@ class WeiTypeTuple extends WeiType {
     	super();
     	
         this.type = abiType;
-        this.input = input;
-    }
+        this.inputs = [];
 
-    encode() {
+        const components = this.type.components;
 
-    }
+        // Parse the component types of the input
+        for ( const component of components ) {
+            const name = component.name;
 
-    decode() {
+            // Grab by name, if not available error out.
+            if ( !(name in input) ) {
+                throw new Error(`Did not find ${name} in the input passed to WeiTypeTuple`);
+            }
 
+            this.inputs.push(component.parse(input[name]));
+        }
     }
 }
 

@@ -21,9 +21,43 @@ class WeiFunctionABI {
         this.outputs = (this.abi.outputs || []).map((x) => new WeiABIType(x));
 
         // Generate the Signature
-        const args = this.abi.inputs.map((obj) => obj.type).join(",");
+        // Recursively creating the tuple ones
+        const args_map_fn = (obj) => {
+            if ( obj.type != 'tuple' ) {
+                return obj.type;
+            }
+            else {
+                return "(" + obj.components.map(args_map_fn).join(",") + ")";
+            }
+        };
 
+        const args = this.abi.inputs.map(args_map_fn).join(",");
         this.signature = `${abi.name || 'constructor'}(${args})`;
+
+        this._flattenInputs();
+    }
+
+    /**
+     * Flatten the inputs that are tuples
+     *
+     * @private
+     */
+    _flattenInputs(inputs = undefined) {
+        if ( inputs == undefined ) {
+            this.flattenedInputs = [];
+            inputs = this.inputs;
+        }
+
+        for ( let i = 0; i < inputs.length; i++ ) {
+            const input = inputs[i];
+
+            if ( input.components.length > 0 ) {
+                this._flattenInputs(input.components);
+            }
+            else {
+                this.flattenedInputs.push(input);
+            }
+        }
     }
 
     /**
@@ -43,8 +77,42 @@ class WeiFunctionABI {
             output = Buffer.from([]);
         }
 
+        if ( args.length != this.inputs.length ) {
+            throw new Error(`Found ${args.length} arguments, expected ${this.inputs.length}.`);
+        }
+
+        const tmps = args.map((x, i) => [x, this.inputs[i]]);
+
+        for ( let i = 0; i < tmps.length; i++ ) {
+            const tmp = tmps[i];
+            const input = tmp[1];
+
+            // Skip the non-tuple types
+            if ( input.type != 'tuple' ) {
+                continue;
+            }
+
+            const obj = tmp[0];
+            const fields = [];
+
+            // Put component values into fields from obj argument.
+            for ( let j = 0; j < input.components.length; j++ ) {
+                const component = input.components[j];
+
+                if ( !obj[component.name] ) {
+                    throw new Error(`Expected to find ${component.name} in argument.`);
+                }
+
+                fields.push([obj[component.name], component]);
+            }
+
+            tmps.splice(i, 1, ... fields);
+        }
+
+        args = tmps.map(x => x[0]);
+
         // How many bytes of static section
-        const staticSection = this.abi.inputs.length * 32;
+        const staticSection = this.flattenedInputs.length * 32;
 
         // Offsets for the dynamic section
         let currOffset = staticSection;
@@ -52,8 +120,8 @@ class WeiFunctionABI {
         let dynamic = Buffer.from([]);
 
         // Encode static section
-        for ( let i = 0; i < this.inputs.length; i++ ) {
-            const input = this.inputs[i];
+        for ( let i = 0; i < this.flattenedInputs.length; i++ ) {
+            const input = this.flattenedInputs[i];
             const parse = input.parse(args[i]);
 
             if ( input.isStatic ) {
