@@ -39,7 +39,7 @@ class WeiHttpProvider extends WeiProvider {
                             reject(new Error(out.error.message));
                         }
                         else if ( !out.result ) {
-                            reject(new Error("Failed to get a response"));
+                            reject(new Error(`Failed to get a response: ${body}`));
                         }
                         else {
                             resolve(out.result);
