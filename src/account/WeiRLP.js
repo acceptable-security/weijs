@@ -1,6 +1,13 @@
 const assert = require('assert');
 const BN = require('bn.js');
 
+/** 
+ * Strip any leading zeros from a buffer
+ *
+ * @param {Buffer} buffer - The Buffer to strip the zeros from.
+ * @returns {Buffer} The stripped buffer.
+ * @private
+ */
 function trimLeadingZero(buffer) {
     assert(buffer instanceof Buffer);
 
