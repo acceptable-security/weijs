@@ -1,5 +1,5 @@
+const SimpleStorage = require('../examples/SimpleStorage.js');
 const Wei = require('../src/Wei.js');
-// const SimpleStorage = require('../examples/SimpleStorage.js');
 
 const assert = require('assert');
 const secp256k1 = require('secp256k1');
@@ -44,4 +44,50 @@ describe('Wei', function() {
             assert.equal(account.address, address);
         });
     });
+});
+
+describe('SimpleStorage', function () {
+    it('should correctly deploy', async function () {
+        const wei = new Wei("http://localhost:8545");
+
+        const contract = wei.contract(SimpleStorage.abi);
+        const account = wei.accounts.newKeyAccount();
+        await contract.deploy(SimpleStorage.bytecode, '0x1234567890', { from: account });
+
+        assert(contract.address.length > 2);
+    });
+
+    it('should correctly get data', async function () {
+        const wei = new Wei("http://localhost:8545");
+
+        const contract = wei.contract(SimpleStorage.abi);
+        const account = wei.accounts.newKeyAccount();
+        await contract.deploy(SimpleStorage.bytecode, '0x1234567890', { from: account });
+
+        assert.equal((await contract.get()).output[0].toString(16), '1234567890');
+    });
+
+    it('should correctly get/set from a uint256', async function () {
+        const wei = new Wei("http://localhost:8545");
+
+        const contract = wei.contract(SimpleStorage.abi);
+        const account = wei.accounts.newKeyAccount();
+        await contract.deploy(SimpleStorage.bytecode, '0x1234567890', { from: account });
+
+        await contract.set('0xdeadbeef', { from: account });
+
+        assert.equal((await contract.get()).output[0].toString(16), 'deadbeef');
+    });
+
+    it('should correctly get/set from a uint256 array', async function () {
+        const wei = new Wei("http://localhost:8545");
+
+        const contract = wei.contract(SimpleStorage.abi);
+        const account = wei.accounts.newKeyAccount();
+        await contract.deploy(SimpleStorage.bytecode, '0x1234567890', { from: account });
+
+        await contract.setFirst(['0xcafebabe'], {from: account});
+
+        assert.equal((await contract.get()).output[0].toString(16), 'cafebabe');
+    })
 });
