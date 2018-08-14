@@ -18,7 +18,7 @@ class WeiWeb3Provider extends WeiProvider {
      * @param {(string|Object)} payload - Data to be sent to the RPC.
      * @returns {string} The result from the RPC.
      */
-    gsend(payload) {
+    send(payload) {
         return new Promise((resolve, reject) => {
         	const fn = this.provider.sendAsync || this.provider.send;
 
