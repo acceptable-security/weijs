@@ -69,9 +69,10 @@ class WeiEventABI {
                 data = data.slice(32);
             }
             else {
-                const length = (new BN(data.slice(0, 32))).toNumber();
-                args[input.name] = input.parse(data.slice(32, 32 + length));
-                data = data.slice(32 + length);
+                const pos = (new BN(data.slice(0, 32))).toNumber();
+                const length = (new BN(data.slice(pos, pos + 32))).toNumber();
+                args[input.name] = input.parse(data.slice(pos + 32, pos + 32 + length)).decode();
+                data = data.slice(32);
             }
         }
 
