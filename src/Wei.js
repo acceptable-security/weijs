@@ -4,7 +4,7 @@ const WeiRPC = require('./WeiRPC.js');
 const WeiContract = require('./contract/WeiContract.js');
 
 const WeiHttpProvider = require("./provider/WeiHttpProvider");
-const WeiWeb3Provider = require("./provider/WeiHttpProvider");
+const WeiWeb3Provider = require("./provider/WeiWeb3Provider");
 
 const Web3ProviderClasses = [
     "HttpProivder",
