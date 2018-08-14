@@ -21,11 +21,19 @@ class WeiWeb3Provider extends WeiProvider {
     send(payload) {
         return new Promise((resolve, reject) => {
         	this.provider.sendAsync(payload, (err, res) => {
-                if ( err || !res ) {
+                if ( err ) {
                     reject(err);
+                    return;
+                }
+
+                if ( res.error ) {
+                    reject(new Error(res.error.message));
+                }
+                else if ( !res.result ) {
+                    reject(new Error(`Failed to get a response: ${res}`));
                 }
                 else {
-                    resolve(res);
+                    resolve(res.result);
                 }
             });
         });
