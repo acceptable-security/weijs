@@ -30,7 +30,7 @@ class WeiWeb3Provider extends WeiProvider {
                     reject(new Error(res.error.message));
                 }
                 else if ( !res.result ) {
-                    reject(new Error(`Failed to get a response: ${res}`));
+                    reject(new Error(`Failed to get a response: ${JSON.stringify(res, 0, 4)}`));
                 }
                 else {
                     resolve(res.result);
