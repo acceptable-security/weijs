@@ -1,6 +1,8 @@
 pragma experimental ABIEncoderV2;
 pragma solidity ^0.4.0;
 
+import "TestLibrary.sol";
+
 contract SimpleStorage {
     uint storedData;
 
@@ -20,7 +22,7 @@ contract SimpleStorage {
     function setFirst(uint[] x) public returns (uint256) {
         require(x.length > 0);
         storedData = x[0];
-        return x[0];
+        return TestLibrary.test();
     }
 
     function setStructX(uint256 dank, SimpleStruct x) public returns (uint256) {

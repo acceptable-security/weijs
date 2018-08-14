@@ -20,7 +20,9 @@ class WeiWeb3Provider extends WeiProvider {
      */
     async send(payload) {
         return new Promise((resolve, reject) => {
-            payload.sendAsync(payload, (err, res) => {
+        	const fn = this.payload.sendAsync || this.payload.send;
+
+			fn(payload, (err, res) => {
                 if ( err || !res ) {
                     reject(err);
                 }

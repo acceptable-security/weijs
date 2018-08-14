@@ -8,7 +8,8 @@ const WeiWeb3Provider = require("./provider/WeiHttpProvider");
 
 const Web3ProviderClasses = [
     "HttpProivder",
-    "IpcProivder"
+    "IpcProivder",
+    "HDWalletProvider"
 ];
 
 /** Global class for the WeiJS library. */
@@ -20,7 +21,7 @@ class Wei {
      */
     constructor(provider) {
         // Load provider
-        if ( typeof a == "object" ) {
+        if ( typeof provider == "object" ) {
             // Handle web3 wrapper
             if ( Web3ProviderClasses.indexOf(provider.constructor.name) >= 0 ) {
                 this.provider = new WeiWeb3Provider(provider);              
