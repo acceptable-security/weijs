@@ -1,6 +1,6 @@
 {
   "name": "weijs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An alternative Ethereum JavaScript API",
   "main": "src/Wei.js",
   "author": "",
